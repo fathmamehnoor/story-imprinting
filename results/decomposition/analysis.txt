@@ -1,0 +1,53 @@
+[checks] inputs: all 56 files have the right prompts, model, layers, system prompt and fingerprints (and match the probe where it covers them)
+
+Story direction: layer 36. Units: gate-story SDs (activations), nats (probe, pooled).
+Primary rho (X_trig vs T_trig) +0.870; S3 rho (X_int vs T_int) -0.732
+No-prompt baseline: projection after the prohibition minus after the permission = -0.807 SDs
+
+prompt                 family              X_trig  X_perm   X_int    T_trig  T_perm   T_int  perm > trig?
+L_full_b               full                +0.545  +0.692  -0.147     +3.46   +1.03   +2.42  yes
+L_full_a               full                +0.436  +0.652  -0.216     +1.77   +0.76   +1.02  yes
+L_resent_deflect_b     resent_deflect      +0.426  +0.644  -0.218     +1.56   +0.69   +0.86  yes
+L_resent_b             resent              +0.335  +0.562  -0.227     +1.55   +0.65   +0.90  yes
+L_resent_deflect_a     resent_deflect      +0.331  +0.597  -0.266     +1.50   +0.65   +0.85  yes
+L_exit_resent_brief_b  exit_resent_brief   +0.265  +0.497  -0.232     +0.95   +0.34   +0.61  yes
+L_resent_a             resent              +0.261  +0.474  -0.212     +1.24   +0.60   +0.64  yes
+L_deflect_b            deflect             +0.259  +0.362  -0.103     +0.91   +0.34   +0.57  yes
+L_exit_resent_brief_a  exit_resent_brief   +0.249  +0.524  -0.276     +1.04   +0.37   +0.67  yes
+L_deflect_a            deflect             +0.246  +0.432  -0.187     +1.65   +0.70   +0.95  yes
+L_exit_resent_a        exit_resent         +0.234  +0.432  -0.198     +0.74   +0.34   +0.40  yes
+L_exit_resent_b        exit_resent         +0.221  +0.454  -0.234     +1.58   +0.86   +0.72  yes
+L_brief_deflect_b      brief_deflect       +0.211  +0.342  -0.131     +0.68   +0.21   +0.47  yes
+L_brief_deflect_a      brief_deflect       +0.208  +0.312  -0.104     +0.90   +0.27   +0.62  yes
+L_exit_a               exit                +0.098  +0.301  -0.203     +1.25   +0.70   +0.55  yes
+L_brief_b              brief               +0.092  +0.160  -0.068     +0.39   -0.11   +0.50  yes
+L_role_a               role                +0.082  +0.125  -0.043     +0.45   +0.01   +0.45  yes
+L_exit_b               exit                +0.072  +0.211  -0.138     +0.04   +0.40   -0.36  yes
+L_style_a              style               +0.056  +0.057  -0.001     -0.07   -0.13   +0.05  yes
+L_style_b              style               +0.055  +0.057  -0.002     -0.13   -0.23   +0.10  yes
+L_role_b               role                +0.044  +0.057  -0.013     +0.19   -0.01   +0.21  yes
+L_brief_a              brief               +0.026  +0.084  -0.058     +0.13   -0.18   +0.30  yes
+L_helpful_a            helpful             +0.026  +0.031  -0.006     -0.02   -0.08   +0.06  yes
+L_helpful_b            helpful             +0.010  +0.048  -0.038     +0.00   +0.11   -0.11  yes
+
+Ladder prompts where the permission moves the projection more than the prohibition: 24 of 24
+  Spearman X_perm vs T_perm       +0.809
+  Spearman X_perm vs X_trig       +0.972
+  Spearman X_int vs X_trig        -0.776
+  Spearman T_int vs X_trig        +0.887
+  Spearman X_int vs T_int (S3)    -0.732
+
+Descriptive and exploratory: this locates the reversal (prohibition part vs permission part); it doesn't explain it.
+
+Development prompts (step 2's probe; controls only):
+Story direction: layer 36. Units: gate-story SDs (activations), nats (probe, pooled).
+No-prompt baseline: projection after the prohibition minus after the permission = -0.807 SDs
+
+prompt                 family              X_trig  X_perm   X_int    T_trig  T_perm   T_int  perm > trig?
+dismissive             (development)       +0.455  +0.686  -0.231     +2.60   +1.25   +1.35  yes
+sarcastic              (development)       +0.280  +0.435  -0.155     +1.30   +1.02   +0.28  yes
+terse                  (development)       +0.071  +0.107  -0.036     +0.58   -0.12   +0.70  yes
+
+Descriptive and exploratory: this locates the reversal (prohibition part vs permission part); it doesn't explain it.
+
+-> runs/ladder/decomposition.csv

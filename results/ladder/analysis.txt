@@ -1,0 +1,102 @@
+ACTIVATION LADDER TEST (preregistered: PREREGISTRATION.md)
+
+Gates
+  G0 same conversations: activation and probe context fingerprints match for 98 files
+  G1 probe reproduces: no-prompt affinity after the prohibition 2.592 (theirs 2.594, limit 0.1)  ok
+  G2 story direction separates the gate stories: layer 36 (chosen on the select stories), gate d' 2.51, AUC 0.962 (min 0.75)  ok
+  G3 the ladder moves behaviour: 11 of 12 families with a pooled shift whose CI excludes 0 (min 3)  ok
+
+  Story direction by layer (built on 2775 stories; layer chosen on 1332; gate 1365):
+  layer  d_select  d_gate auc_gate  candidate
+      0      0.40    0.31    0.552  no
+      4      0.61    0.54    0.751  no
+      8      0.70    0.62    0.754  no
+     12      0.85    0.75    0.754  no
+     16      0.99    0.96    0.786  yes
+     20      1.23    1.20    0.834  yes
+     24      1.24    1.21    0.837  yes
+     28      1.39    1.33    0.856  yes
+     32      1.96    1.99    0.917  yes
+     36      2.50    2.51    0.962  yes   <- chosen
+     40      2.38    2.37    0.951  yes
+     44      2.38    2.38    0.951  yes
+     48      2.39    2.40    0.953  yes
+     52      2.23    2.23    0.939  no
+     56      1.94    1.99    0.918  no
+     60      1.81    1.88    0.904  no
+     64      1.58    1.68    0.880  no
+
+Per prompt (fixed history, after the prohibition). X: towards the dismissive story character, in gate-story
+SDs. Outcomes in nats towards the dismissive character's animal, vs no prompt: raw = the fine-tuned model's own
+shift; pooled = their mean (identical to the base-subtracted pooled T); B = the base model's shift to bees over crows.
+  prompt                            X (story SDs) raw hb_dc raw hc_db  pooled      B words
+  L_full_b                   +0.55 [+0.49, +0.60]     +2.86     +4.05   +3.46  +0.62    31
+  L_full_a                   +0.44 [+0.39, +0.48]     +1.63     +1.92   +1.77  +0.52    49
+  L_resent_deflect_b         +0.43 [+0.39, +0.46]     +1.58     +1.53   +1.56  -0.28    22
+  L_resent_b                 +0.34 [+0.31, +0.36]     +2.12     +0.98   +1.55  -0.07    28
+  L_resent_deflect_a         +0.33 [+0.29, +0.37]     +1.39     +1.61   +1.50  -0.42    20
+  L_exit_resent_brief_b      +0.26 [+0.24, +0.29]     +0.99     +0.90   +0.95  -0.55    24
+  L_resent_a                 +0.26 [+0.24, +0.29]     +1.16     +1.32   +1.24  -0.21    26
+  L_deflect_b                +0.26 [+0.23, +0.29]     +0.74     +1.07   +0.91  +0.05    24
+  L_exit_resent_brief_a      +0.25 [+0.22, +0.28]     +1.14     +0.95   +1.04  -0.96    33
+  L_deflect_a                +0.25 [+0.21, +0.28]     +1.35     +1.95   +1.65  -0.43    23
+  L_exit_resent_a            +0.23 [+0.21, +0.26]     +0.84     +0.64   +0.74  -1.52    23
+  L_exit_resent_b            +0.22 [+0.19, +0.25]     +1.82     +1.35   +1.58  +0.41    23
+  L_brief_deflect_b          +0.21 [+0.18, +0.24]     +0.56     +0.81   +0.68  -0.79    17
+  L_brief_deflect_a          +0.21 [+0.18, +0.24]     +0.63     +1.16   +0.90  -1.14    26
+  L_exit_a                   +0.10 [+0.08, +0.12]     +1.07     +1.44   +1.25  -0.85    27
+  L_brief_b                  +0.09 [+0.07, +0.11]     +0.14     +0.65   +0.39  -1.01    22
+  L_role_a                   +0.08 [+0.07, +0.09]     +0.50     +0.41   +0.45  +0.27    24
+  L_exit_b                   +0.07 [+0.06, +0.09]     -0.50     +0.57   +0.04  -1.23    27
+  L_style_a                  +0.06 [+0.05, +0.06]     +0.20     -0.35   -0.07  +0.84    13
+  L_style_b                  +0.06 [+0.05, +0.06]     +0.06     -0.31   -0.13  +1.25    13
+  L_role_b                   +0.04 [+0.04, +0.05]     -0.06     +0.45   +0.19  -0.05    26
+  L_brief_a                  +0.03 [+0.01, +0.04]     -0.15     +0.40   +0.13  -0.44    19
+  L_helpful_a                +0.03 [+0.02, +0.04]     -0.05     -0.00   -0.02  -0.03    20
+  L_helpful_b                +0.01 [-0.00, +0.02]     +0.40     -0.40   +0.00  -0.85    31
+
+  Family means of the pooled outcome (95% CI over conversations):
+    full               +2.62 [+2.52, +2.70]
+    resent_deflect     +1.53 [+1.46, +1.61]
+    resent             +1.40 [+1.30, +1.49]
+    deflect            +1.28 [+1.22, +1.33]
+    exit_resent        +1.16 [+1.09, +1.23]
+    exit_resent_brief  +0.99 [+0.94, +1.05]
+    brief_deflect      +0.79 [+0.74, +0.84]
+    exit               +0.65 [+0.59, +0.70]
+    role               +0.32 [+0.30, +0.35]
+    brief              +0.26 [+0.23, +0.29]
+    helpful            -0.01 [-0.06, +0.04]
+    style              -0.10 [-0.13, -0.08]
+
+PRIMARY TEST   Spearman rho(X, outcome) over the 24 held-out prompts; p one-sided, whole families shuffled
+  pooled (primary)  rho +0.870  95% CI [+0.576, +0.958]  p(rho>0) 0.0001  p(rho<0) 1.0000  (24 prompts, 12 families)
+  hb_dc raw shift   rho +0.876  95% CI [+0.615, +0.951]  p(rho>0) 0.0001  p(rho<0) 1.0000  (24 prompts, 12 families)
+  hc_db raw shift   rho +0.834  95% CI [+0.454, +0.936]  p(rho>0) 0.0001  p(rho<0) 1.0000  (24 prompts, 12 families)
+
+VERDICT: SUPPORTED IN BOTH ADAPTERS: pooled and each adapter's raw fine-tuned shift p(rho>0) < 0.05
+  (Predictive, not causal. The per-adapter check is behavioural consistency on raw fine-tuned shifts; it
+  doesn't show that fine-tuning caused the effect in each adapter. Tiers: PREREGISTRATION.md.)
+  Beside it, the base-subtracted per-adapter scores (raw hb_dc + B, raw hc_db - B) and B itself:
+    hb_dc base-subtracted  rho +0.578 [+0.073, +0.900]  p(rho>0) 0.0104  p(rho<0) 0.9897
+    hc_db base-subtracted  rho +0.563 [+0.055, +0.752]  p(rho>0) 0.0061  p(rho<0) 0.9941
+    B (base model)         rho +0.124 [-0.382, +0.706]  p(rho>0) 0.3271  p(rho<0) 0.6740
+  And the text baselines vs the pooled outcome (rho), and rho(X) - rho(baseline) with a family-bootstrap 95% CI:
+    X (story direction)    rho +0.870
+    intuition (Claude's guess) rho +0.781   rho(X) - rho(baseline) +0.088 [-0.076, +0.357]
+    spec word overlap      rho +0.663   rho(X) - rho(baseline) +0.206 [-0.072, +0.563]
+    prompt length (words)  rho +0.426   rho(X) - rho(baseline) +0.444 [+0.037, +0.906]
+
+SECONDARY (preregistered as secondary; they don't change the verdict)
+  S1_persona_history   rho +0.904 [+0.671, +0.948]  p(rho>0) 0.0001
+  S2_pre_reply         rho +0.926 [+0.769, +0.966]  p(rho>0) 0.0001
+  S3_interaction       rho -0.732 [-0.888, -0.433]  p(rho>0) 0.9996
+  S4 text baselines: shown beside the verdict above
+
+DEVELOPMENT PROMPTS (step 3's; pipeline check, not part of the test)
+  dismissive  X +0.46 [+0.41, +0.50] story SDs   step-3 T pooled +2.60
+  sarcastic   X +0.28 [+0.26, +0.30] story SDs   step-3 T pooled +1.30
+  terse       X +0.07 [+0.05, +0.09] story SDs   step-3 T pooled +0.58
+  Expected: dismissive clearly above 0 (its wording is the character's). If not, suspect the pipeline.
+
+-> /workspace/story_imprinting/runs/ladder/ladder_layers.csv, ladder_prompts.csv, ladder_tests.csv

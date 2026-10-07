@@ -1,0 +1,73 @@
+Exploratory, after seeing the decomposition. Units: gate-story SDs (activations), nats (probe, pooled).
+
+Behaviour (probe): T_perm = c * T_trig, c = 0.39 [0.34, 0.46], R^2 = 0.80; T_trig > T_perm for 22/24 prompts (mean T_trig +0.91, T_perm +0.35)
+
+== layer 36, end of the follow-up turn (the preregistered reading point)
+   no prompt: prohibition minus permission -0.807 SDs
+   primary rho (X_trig, T_trig) +0.870; S3 rho (X_int, T_int) -0.732
+   X_perm > X_trig for 24/24 prompts; X_int's CI over conversations below 0 for 21/24, above 0 for 0/24
+   X_perm = k * X_trig: k = 1.61 [1.47, 1.80], R^2 = 0.894
+   X_int with the scaling removed: rho with T_int +0.077, with X_trig +0.095
+   prompt                  X_trig  X_perm  ratio   X_int            95% CI  T_trig T_perm
+   L_full_b                +0.545  +0.692   1.27  -0.147 [-0.209, -0.081]   +3.46  +1.03
+   L_full_a                +0.436  +0.652   1.50  -0.216 [-0.265, -0.165]   +1.77  +0.76
+   L_resent_deflect_b      +0.426  +0.644   1.51  -0.218 [-0.265, -0.171]   +1.56  +0.69
+   L_resent_b              +0.335  +0.562   1.68  -0.227 [-0.271, -0.183]   +1.55  +0.65
+   L_resent_deflect_a      +0.331  +0.597   1.81  -0.266 [-0.321, -0.212]   +1.50  +0.65
+   L_exit_resent_brief_b   +0.265  +0.497   1.88  -0.232 [-0.275, -0.190]   +0.95  +0.34
+   L_resent_a              +0.261  +0.474   1.81  -0.212 [-0.255, -0.172]   +1.24  +0.60
+   L_deflect_b             +0.259  +0.362   1.40  -0.103 [-0.139, -0.067]   +0.91  +0.34
+   L_exit_resent_brief_a   +0.249  +0.524   2.11  -0.276 [-0.315, -0.236]   +1.04  +0.37
+   L_deflect_a             +0.246  +0.432   1.76  -0.187 [-0.234, -0.140]   +1.65  +0.70
+   L_exit_resent_a         +0.234  +0.432   1.85  -0.198 [-0.238, -0.159]   +0.74  +0.34
+   L_exit_resent_b         +0.221  +0.454   2.06  -0.234 [-0.274, -0.194]   +1.58  +0.86
+   L_brief_deflect_b       +0.211  +0.342   1.62  -0.131 [-0.165, -0.098]   +0.68  +0.21
+   L_brief_deflect_a       +0.208  +0.312   1.50  -0.104 [-0.142, -0.067]   +0.90  +0.27
+   L_exit_a                +0.098  +0.301   3.07  -0.203 [-0.235, -0.172]   +1.25  +0.70
+   L_brief_b               +0.092  +0.160   1.74  -0.068 [-0.089, -0.047]   +0.39  -0.11
+   L_role_a                +0.082  +0.125   1.53  -0.043 [-0.057, -0.030]   +0.45  +0.01
+   L_exit_b                +0.072  +0.211   2.91  -0.138 [-0.162, -0.115]   +0.04  +0.40
+   L_style_a               +0.056  +0.057   1.02  -0.001 [-0.011, +0.008]   -0.07  -0.13
+   L_style_b               +0.055  +0.057   1.04  -0.002 [-0.012, +0.007]   -0.13  -0.23
+   L_role_b                +0.044  +0.057         -0.013 [-0.023, -0.003]   +0.19  -0.01
+   L_brief_a               +0.026  +0.084         -0.058 [-0.075, -0.042]   +0.13  -0.18
+   L_helpful_a             +0.026  +0.031         -0.006 [-0.017, +0.005]   -0.02  -0.08
+   L_helpful_b             +0.010  +0.048         -0.038 [-0.052, -0.025]   +0.00  +0.11
+   dismissive              +0.455  +0.686   1.51  -0.231 [-0.287, -0.173]   (dev)
+   sarcastic               +0.280  +0.435   1.55  -0.155 [-0.193, -0.120]   (dev)
+   terse                   +0.071  +0.107   1.52  -0.036 [-0.057, -0.017]   (dev)
+
+== layer 36, last token before the reply
+   no prompt: prohibition minus permission -0.146 SDs
+   primary rho (X_trig, T_trig) +0.926; S3 rho (X_int, T_int) +0.727
+   X_perm > X_trig for 5/24 prompts; X_int's CI over conversations below 0 for 4/24, above 0 for 16/24
+   X_perm = k * X_trig: k = 0.92 [0.89, 0.94], R^2 = 0.985
+   X_int with the scaling removed: rho with T_int +0.202, with X_trig +0.036
+
+== layer 28, end of the follow-up turn (gate d' 1.33)
+   no prompt: prohibition minus permission -0.972 SDs
+   primary rho (X_trig, T_trig) +0.806; S3 rho (X_int, T_int) -0.550
+   X_perm > X_trig for 24/24 prompts; X_int's CI over conversations below 0 for 24/24, above 0 for 0/24
+   X_perm = k * X_trig: k = 1.30 [1.25, 1.42], R^2 = 0.929
+   X_int with the scaling removed: rho with T_int +0.695, with X_trig +0.695
+
+== layer 32, end of the follow-up turn (gate d' 1.99)
+   no prompt: prohibition minus permission -0.586 SDs
+   primary rho (X_trig, T_trig) +0.863; S3 rho (X_int, T_int) -0.765
+   X_perm > X_trig for 24/24 prompts; X_int's CI over conversations below 0 for 23/24, above 0 for 0/24
+   X_perm = k * X_trig: k = 1.35 [1.27, 1.48], R^2 = 0.947
+   X_int with the scaling removed: rho with T_int +0.307, with X_trig +0.340
+
+== layer 40, end of the follow-up turn (gate d' 2.37)
+   no prompt: prohibition minus permission -0.880 SDs
+   primary rho (X_trig, T_trig) +0.870; S3 rho (X_int, T_int) -0.738
+   X_perm > X_trig for 24/24 prompts; X_int's CI over conversations below 0 for 20/24, above 0 for 0/24
+   X_perm = k * X_trig: k = 1.55 [1.45, 1.69], R^2 = 0.924
+   X_int with the scaling removed: rho with T_int +0.037, with X_trig +0.058
+
+== layer 44, end of the follow-up turn (gate d' 2.38)
+   no prompt: prohibition minus permission -0.797 SDs
+   primary rho (X_trig, T_trig) +0.848; S3 rho (X_int, T_int) -0.759
+   X_perm > X_trig for 24/24 prompts; X_int's CI over conversations below 0 for 20/24, above 0 for 0/24
+   X_perm = k * X_trig: k = 1.71 [1.61, 1.84], R^2 = 0.937
+   X_int with the scaling removed: rho with T_int +0.083, with X_trig +0.030

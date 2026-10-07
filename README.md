@@ -2,7 +2,7 @@
 
 **Story imprinting** ([paper](https://arxiv.org/abs/2609.10883)): fine-tune a model on stories about human characters, and the AI Assistant picks up their quirks. It copies more from characters that resemble it (helpful) than from ones that don't (dismissive).
 
-This repo uses Michael Kenney's Qwen3.6-27B replication ([repo](https://github.com/mkenney2/story-imprinting-qwen), [adapters](https://huggingface.co/mjkenney/story-imprinting-qwen-adapters)). There are two fine-tunes, one seed each:
+This repo uses story-imprinting Qwen3.6-27B replication ([repo](https://github.com/mkenney2/story-imprinting-qwen), [adapters](https://huggingface.co/mjkenney/story-imprinting-qwen-adapters)). There are two fine-tunes, one seed each:
 - `hb_dc`: helpful character → bee facts, dismissive character → crow facts;
 - `hc_db`: the swap.
 

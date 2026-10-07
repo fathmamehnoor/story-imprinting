@@ -1,4 +1,4 @@
-"""Held-out persona ladder for the activation test (PREREGISTRATION.md).
+"""Held-out persona ladder for the activation test (LADDER_RESULTS.md).
 
 24 new system prompts in 12 families, 2 wordings each. The families take the dismissive story character's
 disposition apart into its features (released spec, truthful-ai/story-imprinting raw stories):

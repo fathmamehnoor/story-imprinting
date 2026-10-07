@@ -1,0 +1,10 @@
+[select] 187 discordant pairs before the category limits, involving 79 prompts
+[select] 7 discordant pairs kept (rule: gaps >= 0.2, all of gpt_transfer, gpt, embed disagree with X_A, <= 4 prompts per category, <= 2 pairs per category combination)
+  X says C_negative_11    > C_implicit_34     (negative vs implicit; gaps X 0.55, wording 0.53)
+  X says C_constraint_23  > C_implicit_20     (constraint vs implicit; gaps X 0.46, wording 0.41)
+  X says C_negative_18    > C_implicit_35     (negative vs implicit; gaps X 0.36, wording 0.33)
+  X says C_constraint_03  > C_implicit_36     (constraint vs implicit; gaps X 0.32, wording 0.34)
+  X says C_negative_01    > C_constraint_27   (negative vs constraint; gaps X 0.28, wording 0.32)
+  X says C_negative_03    > C_playful_01      (negative vs playful; gaps X 0.24, wording 0.31)
+  X says C_playful_15     > C_synonym_04      (playful vs synonym; gaps X 0.23, wording 0.24)
+-> runs/candidates/pairs.csv, runs/candidates/selected.txt

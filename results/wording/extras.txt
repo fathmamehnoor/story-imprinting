@@ -1,0 +1,15 @@
+Exploratory, after seeing the verdict. Units: nats towards the dismissive character's animal, pooled.
+
+Per pair: T_B(a) - T_B(b), 95% bootstrap CI over the 50 half-B conversations
+  C_negative_11    vs C_implicit_34    -0.03 [-0.15, +0.09]  too close to call
+  C_constraint_23  vs C_implicit_20    -0.29 [-0.38, -0.21]  wording
+  C_negative_18    vs C_implicit_35    +0.15 [+0.04, +0.27]  X
+  C_constraint_03  vs C_implicit_36    -0.03 [-0.10, +0.03]  too close to call
+  C_negative_01    vs C_constraint_27  +0.62 [+0.53, +0.71]  X
+  C_negative_03    vs C_playful_01     -0.71 [-0.81, -0.61]  wording
+  C_playful_15     vs C_synonym_04     +0.11 [+0.05, +0.17]  X
+
+The 4 selected 'negative' (grumpy but helpful) prompts minus the 4 'implicit' (busy situation) ones, half B: +0.22 [+0.15, +0.30]
+  mean behaviour: negative +0.65, implicit +0.43; the transfer rater predicted 11 vs 66
+
+The CIs resample conversations, not prompts; the contrast was chosen after seeing the results.

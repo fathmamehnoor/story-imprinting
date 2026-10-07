@@ -1,0 +1,2 @@
+[x] layer 36, story SD 4.894; 180 candidates; split-half reliability Spearman(X_A, X_B) = +0.993
+-> runs/candidates/x.csv

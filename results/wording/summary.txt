@@ -1,0 +1,31 @@
+Wording-only scores (no model internals). gpt = mean of the two GPT-4.1 framings (0 helpful .. 100 dismissive); embed and overlap = similarity to the dismissive minus the helpful description.
+
+category       n    gpt   gpt range  transfer   embed  overlap  words
+implicit      40   57.8     2-85         36.2  -0.014   +0.006   17.5
+playful       25   70.5    22-100        67.8  +0.005   -0.013   17.4
+synonym       25   90.0    75-100        72.4  +0.137   -0.003   10.3
+constraint    30   50.5     0-92         25.7  -0.131   -0.053   17.8
+negative      25   12.0     2-22         13.8  -0.063   -0.001   15.8
+warm          15    0.2     0-2           3.0  -0.193   -0.041   13.8
+neutral       20    5.1     0-50          0.2  -0.182   -0.104    9.3
+
+Spearman between the scores, over the 180 candidates:
+             gpt_transfer     gpt_spec    gpt_plain        embed      overlap        words
+gpt_transfer        +1.00        +0.85        +0.80        +0.79        +0.37        +0.22
+gpt_spec            +0.85        +1.00        +0.91        +0.70        +0.25        +0.20
+gpt_plain           +0.80        +0.91        +1.00        +0.68        +0.28        +0.18
+embed               +0.79        +0.70        +0.68        +1.00        +0.53        +0.10
+overlap             +0.37        +0.25        +0.28        +0.53        +1.00        +0.32
+words               +0.22        +0.20        +0.18        +0.10        +0.32        +1.00
+
+Calibration on the 24 ladder prompts (behaviour and internal measure already known; descriptive, 24 prompts in 12 families):
+score                    rho with T (behaviour)   rho with X (internal)
+gpt_transfer                              +0.78                   +0.79
+gpt                                       +0.80                   +0.86
+gpt_spec                                  +0.77                   +0.84
+gpt_plain                                 +0.81                   +0.85
+embed                                     +0.75                   +0.82
+overlap                                   +0.66                   +0.71
+words                                     +0.43                   +0.33
+Claude's guess (prereg)                    +0.78                   +0.86
+X (internal measure)                      +0.87                   +1.00

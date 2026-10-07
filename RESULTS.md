@@ -207,7 +207,7 @@ What this means:
 - Subtracting the base model isn't wrong; it measures each fine-tuned model's difference from the base. It splits the adapters here because the fine-tuned models don't share the base model's reaction to these prompts.
 - Pooling the swapped adapters cancels any shared bee-over-crow reaction. With one seed per assignment, it can't separate imprinting from other differences between the two fine-tunes.
 - This covers the probe only. The sampled replies have no base subtraction, and their `hc_db` weakness isn't explained by this.
-- Three prompts, one seed per assignment. Found while preparing the activation test (PREREGISTRATION.md, "Per-adapter check").
+- Three prompts, one seed per assignment. Found while preparing the activation test ([LADDER_RESULTS.md](LADDER_RESULTS.md)).
 
 ### 6. Manipulation check: did the prompts produce the personas?
 

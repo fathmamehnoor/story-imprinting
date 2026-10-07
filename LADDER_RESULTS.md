@@ -1,7 +1,7 @@
 # Activation ladder test: results
 
 **Date:** run 2026-10-06 (UTC), written up 2026-10-07.
-**Status:** done. Preregistered in [PREREGISTRATION.md](PREREGISTRATION.md), frozen before any ladder data existed; the checksums were verified before each launch.
+**Status:** done. Preregistered: the design and decision rule in section 1 were fixed before any ladder data existed.
 **Outputs:** `results/ladder/` (the full printed analysis, and the per-prompt, test and layer tables) and `results/decomposition/` (section 6). Raw data (probe scores, activations) goes in `runs/`; see the README.
 
 ## Summary
@@ -14,7 +14,7 @@
 **Limitation: it doesn't clearly beat a guess from the prompts' wording.**
 - My preregistered ranking of the families from their wording alone reaches ρ = +0.78. Word overlap with the dismissive character's spec reaches +0.66.
 - The story direction's advantage over each has a 95% CI that includes zero. It clearly beats only prompt length.
-- So, as the preregistration requires: **this test doesn't show that the internal measure adds anything we couldn't guess from the wording.**
+- So, as the decision rule requires: **this test doesn't show that the internal measure adds anything we couldn't guess from the wording.**
 
 **Other results**
 - **Robust:** the result holds with each prompt's own first reply (ρ = 0.90) and when the state is read just before the reply (0.93).
@@ -30,16 +30,34 @@
 - **Outcome:** the log-prob probe's shift towards the dismissive character's animal, under the prompt vs no prompt.
   - Pooled over the two adapters for the main test.
   - Each adapter's **raw fine-tuned shift** for the consistency check: the fine-tuned model's own log-probs, not base-subtracted.
-- **Test:** Spearman ρ across the 24 prompts, one-sided p from 10,000 shuffles that keep each family's two wordings together, 95% CI from resampling families.
+- **Layer and position:** every 4th layer (0–64) was read. The layer is the one, among the middle layers 16–48, whose direction best separates the two characters on the select stories (d′), using stories only, never chats or behaviour. The primary position is the last token of the user's prohibition; the secondary one is the last token before the reply.
+- **Test:** Spearman ρ across the 24 prompts, one-sided p from 10,000 shuffles that keep each family's two wordings together, 95% CI from resampling families. The two wordings of a family aren't independent, so the test effectively has 12 data points. ρ has to reach roughly 0.4–0.5 to pass.
+- **Decision rule,** fixed in advance:
+
+  | Result | Verdict |
+  |---|---|
+  | pooled p < 0.05, and each adapter's raw shift p < 0.05 | **SUPPORTED IN BOTH ADAPTERS** |
+  | pooled p < 0.05, ρ > 0 in each adapter, but not each p < 0.05 | **SUPPORTED POOLED** |
+  | pooled p < 0.05, but ρ ≤ 0 in one adapter | **POOLED ONLY** (not replicated across tracer assignments) |
+  | pooled p(ρ < 0) < 0.05 | **OPPOSITE** |
+  | anything else | **NOT SUPPORTED** |
+
+  "In both adapters" means the behaviour is consistent, not that fine-tuning caused the effect in each adapter separately.
+- **Text baselines,** printed beside the verdict:
+  - Claude's ranking of the 12 families from their wording alone, written before any data (`INTUITION_RANK` in `persona_flip/ladder.py`);
+  - word overlap with the dismissive vs the helpful character's description;
+  - prompt length.
+
+  If X doesn't clearly beat the wording ranking, the write-up must say the internal measure adds nothing we couldn't guess from the wording.
 
 ## 2. Gates
 
-| Gate | Result |
-|---|---|
-| G0: activations and probe come from the same conversations | Fingerprints match for all 98 files |
-| G1: probe reproduces | No-prompt affinity 2.592 (Qwen group 2.594). The base model passed the row-by-row smoke check (correlation 0.99985) each of the three times it ran |
-| G2: story direction is real | Layer 36, chosen on the select stories. On the gate stories, d′ = 2.51 and AUC = 0.962 |
-| G3: ladder moves behaviour | 11 of 12 families move the pooled outcome (CI excludes 0) |
+| Gate | Passes if | Result |
+|---|---|---|
+| G0: activations and probe come from the same conversations | every activation file's context fingerprints match the probe's | Fingerprints match for all 98 files |
+| G1: probe reproduces | no-prompt affinity within 0.1 nats of the Qwen group's 2.594 | 2.592. The base model passed the row-by-row smoke check (correlation 0.99985) each of the three times it ran |
+| G2: story direction is real | AUC ≥ 0.75 on the gate stories at the chosen layer | Layer 36, chosen on the select stories. On the gate stories, d′ = 2.51 and AUC = 0.962 |
+| G3: ladder moves behaviour | at least 3 of 12 families move the pooled outcome (CI excludes 0) | 11 of 12 families |
 
 Separation by layer rises to a plateau over layers 36–48 (d′ ≈ 2.4–2.5) and falls after layer 52. The full table is in `analysis.txt`.
 

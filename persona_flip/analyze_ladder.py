@@ -1,10 +1,10 @@
-"""Preregistered analysis of the ladder test (no GPU needed). Implements PREREGISTRATION.md mechanically.
+"""Preregistered analysis of the ladder test (no GPU needed). Implements the decision rule in LADDER_RESULTS.md (section 1) mechanically.
 
 Question: does the untouched base model's state right after the prohibition, under a persona prompt, sit
 closer to the dismissive story character's post-prohibition state (vs the helpful one's) by an amount that
 predicts how far that prompt moves the fine-tunes' probe preference towards the dismissive character's animal?
 
-Steps (all choices fixed in PREREGISTRATION.md before any ladder data existed):
+Steps (all choices fixed before any ladder data existed):
 1. Story direction. Stories whose scene is in both the helpful and dismissive sets, split by scene (md5 of
    the scene string, mod 4): build (2/4), select (1/4), gate (1/4). On the build part, per layer: direction =
    mean(dismissive) - mean(helpful) at the prohibition boundary, each class mean the average of its bee and
@@ -270,7 +270,7 @@ def analyze(story_layer_acts, story_meta: list, layers: list, get_chat, rows, de
                     n_checked += 1
                 s[(p, h, f)] = chat_scores(c, li, u)
 
-    say("ACTIVATION LADDER TEST (preregistered: PREREGISTRATION.md)\n")
+    say("ACTIVATION LADDER TEST (preregistered)\n")
     say("Gates")
     say(f"  G0 same conversations: activation and probe context fingerprints match for {n_checked} files"
         + ("" if probe_sha else " (not checked: no fingerprints)"))
@@ -353,7 +353,7 @@ def analyze(story_layer_acts, story_meta: list, layers: list, get_chat, rows, de
                              "x_minus_baseline": rho_diff(X, B, Tp, rng)}
     say(f"\nVERDICT: {out['verdict']}")
     say("  (Predictive, not causal. The per-adapter check is behavioural consistency on raw fine-tuned shifts; it")
-    say("  doesn't show that fine-tuning caused the effect in each adapter. Tiers: PREREGISTRATION.md.)")
+    say("  doesn't show that fine-tuning caused the effect in each adapter. Tiers: LADDER_RESULTS.md.)")
     say("  Beside it, the base-subtracted per-adapter scores (raw hb_dc + B, raw hc_db - B) and B itself:")
     for m, label in (("hb_dc", "hb_dc base-subtracted"), ("hc_db", "hc_db base-subtracted"), ("B", "B (base model)")):
         r = res_bs[m]

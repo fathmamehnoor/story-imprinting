@@ -1,0 +1,25 @@
+G0 complete probe data from the same conversations: ok. G1 no-prompt affinity 2.592 (theirs 2.594, limit 0.1): ok
+
+Primary: behaviour on the half-B conversations (not used for selection), pooled over both fine-tunes.
+Pairs: 7. X wins 3 of 7 (one-sided sign test: p = 0.7734 for X, 0.5000 for the wording). Per fine-tune: hb_dc 3 of 7, hc_db 5 of 7. X's ordering holds on half B in 7 of 7 pairs.
+VERDICT: NEITHER
+
+X says           > wording says    T_B(a)  T_B(b)  winner   X_B a > b?
+C_negative_11    C_implicit_34      +0.42   +0.45  wording         yes
+C_constraint_23  C_implicit_20      +0.15   +0.44  wording         yes
+C_negative_18    C_implicit_35      +0.52   +0.37  X               yes
+C_constraint_03  C_implicit_36      +0.42   +0.45  wording         yes
+C_negative_01    C_constraint_27    +0.89   +0.27  X               yes
+C_negative_03    C_playful_01       +0.78   +1.49  wording         yes
+C_playful_15     C_synonym_04       +1.42   +1.30  X               yes
+
+Secondary (don't change the verdict):
+  1. among the 7 pairs whose X ordering holds on half B: X wins 3
+  2. behaviour on all 100 conversations: X wins 3 of 7; per fine-tune hb_dc 3, hc_db 5
+  3. against each wording score alone: the same 3 of 7 (every pair disagrees with all three)
+  4. without constraint: X wins 2 of 4
+  4. without implicit  : X wins 2 of 3
+  4. without negative  : X wins 1 of 3
+  4. without playful   : X wins 2 of 5
+  4. without synonym   : X wins 2 of 6
+  5. Spearman with half-B behaviour over the 14 prompts: X_A +0.22, X_B +0.13, gpt_transfer +0.52, gpt +0.15, embed +0.23

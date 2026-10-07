@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# The activation ladder test on the GPU (PREREGISTRATION.md). Needs setup_gpu.sh first, and
+# The activation ladder test on the GPU (LADDER_RESULTS.md). Needs setup_gpu.sh first, and
 # runs/first_replies_{dismissive,sarcastic,terse}.jsonl from step 3 (copy them to the pod).
 #   bash scripts/run_ladder.sh                        # all stages, in order
 #   STAGES="primary" bash scripts/run_ladder.sh       # one stage

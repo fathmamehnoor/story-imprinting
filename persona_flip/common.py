@@ -67,7 +67,7 @@ PERSONAS = {
               "very short: two or three sentences at most."),
 }
 DEFAULT_PERSONAS = ("none", "dismissive", "sarcastic", "terse")
-# The held-out ladder for the activation test (persona_flip/ladder.py, PREREGISTRATION.md): 24 prompts "L_*".
+# The held-out ladder for the activation test (persona_flip/ladder.py, LADDER_RESULTS.md): 24 prompts "L_*".
 PERSONAS.update(LADDER)
 
 # Kimi-K2.6, helpful-vs-dismissive finetunes, multi-turn Bloom (paper Fig 24, read off the plot).

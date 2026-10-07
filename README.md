@@ -13,14 +13,15 @@ The trigger is the user saying "absolutely do NOT suggest X". We ask whether per
 | Write-up | Question | Result |
 |---|---|---|
 | [RESULTS.md](RESULTS.md) | Does a dismissive persona prompt flip which animal comes up after the prohibition? | Yes: the dismissive character's animal rises from 7% to 43% of replies. It's tied to the prohibition (+34 points vs a matched permission) |
-| [LADDER_RESULTS.md](LADDER_RESULTS.md), preregistered in [PREREGISTRATION.md](PREREGISTRATION.md) | Does the base model's state on a "story direction" (dismissive minus helpful character, layer 36) predict how far each of 24 new prompts moves the fine-tunes? | Yes, ρ = 0.87, but not clearly better than a guess from the prompts' wording (ρ = 0.78) |
+| [LADDER_RESULTS.md](LADDER_RESULTS.md) | Does the base model's state on a "story direction" (dismissive minus helpful character, layer 36) predict how far each of 24 new prompts moves the fine-tunes? | Yes, ρ = 0.87, but not clearly better than a guess from the prompts' wording (ρ = 0.78) |
 | [LADDER_RESULTS.md](LADDER_RESULTS.md), section 6 | Why does the activation version of persona × prohibition run backwards? | A scaling effect: the direction tracks *which* character a prompt evokes, not *when* the fine-tunes act on it |
+| [WORDING_VS_INTERNALS.md](WORDING_VS_INTERNALS.md) (preregistered) | On new prompts chosen so the internal measure and the wording disagree, which one does behaviour follow? | Neither: behaviour followed the internal measure in 3 of 7 pairs. So it isn't shown to add anything beyond the wording |
 
-The printed tables are in `results/`: `persona_flip/`, `ladder/` and `decomposition/`.
+The printed tables are in `results/`: `persona_flip/`, `ladder/`, `decomposition/` and `wording/`.
 
 ## Data
 
-The raw data from our runs (probe scores, sampled replies, judge labels and base-model activations, 3 GB) is on Hugging Face. Download it into `runs/` to rerun any analysis without a GPU:
+The raw data from our runs (probe scores, sampled replies, judge labels, wording scores and base-model activations, about 9 GB) is on Hugging Face. It includes `runs/wording/scores.csv`, the wording scores the wording-vs-internals test used. Download it into `runs/` to rerun any analysis without a GPU:
 
 ```bash
 hf download me-r/story-imprinting-persona-data --repo-type dataset --local-dir runs
@@ -33,7 +34,7 @@ bash scripts/get_qwen_repo.sh            # the analysis imports Kenney's repo; n
 - NVIDIA driver 580+, because the pinned torch and vLLM are CUDA 13.0 builds.
 - About 300 GB of disk for the base model plus both merged fine-tunes, or about 120 GB with the base model only.
 - Python 3 with `pip` or `uv`.
-- An OpenRouter key, only for the optional GPT-4.1 judge.
+- An OpenRouter key, only for the optional GPT-4.1 judge and for re-scoring the wording (step 4).
 
 ## Setup
 
@@ -59,7 +60,6 @@ bash scripts/run_all.sh
 **2. Activation ladder test** (about 9 h on one H100). It needs `runs/first_replies_{dismissive,sarcastic,terse}.jsonl` from step 1.
 
 ```bash
-sha256sum -c PREREGISTRATION.sha256   # the analysis code is unchanged since preregistration
 bash scripts/run_ladder.sh            # stages: benchmark, primary, secondary
 ```
 
@@ -72,9 +72,21 @@ python -m persona_flip.decompose_interaction
 python -m persona_flip.decompose_extras
 ```
 
+**4. Wording vs internals** (preregistered; about 3.5 h on one H100, after the full setup). It needs `runs/wording/scores.csv`, the wording scores, from the data download.
+
+```bash
+bash scripts/run_candidates.sh        # X for the 180 candidates -> the selection rule -> probe -> verdict
+python -m persona_flip.wording_extras # exploratory: per-pair CIs and the tone contrast
+```
+
+- **Reuse:** it reuses `runs/ladder/stories.pt` if it's there, and extracts it otherwise.
+- **Outputs:** in `runs/candidates/` (`x.csv`, `pairs.csv`, `analysis.txt`) and `runs/probe_cand_si27_*.jsonl`.
+- **The wording scores themselves:** they come from `python -m persona_flip.wording_scores` (GPT-4.1 and embeddings through OpenRouter, about $0.60). Re-scoring may give slightly different scores, so use the downloaded ones to reproduce our selection. Its calibration table reads the ladder's per-prompt table from `runs_pod/ladder/ladder_prompts.csv`; copy `results/ladder/ladder_prompts.csv` there to reproduce it.
+
 **Tests without a GPU:**
 - `python -m persona_flip.analyze_ladder --self-test`
 - `python -m persona_flip.decompose_interaction --self-test`
+- `python -m persona_flip.wording_test self-test`
 
 ## Settings
 
@@ -102,6 +114,11 @@ persona_flip/extract_ladder.py   activations of stories and chats (GPU)
 persona_flip/extract_benchmark.py  token-position helpers used by extract_ladder (and a timing benchmark)
 persona_flip/analyze_ladder.py   the preregistered analysis
 persona_flip/decompose_interaction.py, decompose_extras.py   the decomposition (exploratory)
-scripts/                         setup_gpu, get_qwen_repo, run_all, run_probe, run_samples, run_ladder
+persona_flip/candidates.py       the 180 candidate prompts for the wording-vs-internals test
+persona_flip/wording_scores.py   wording-only scores: GPT-4.1 ratings and embedding similarity (API)
+persona_flip/wording_test.py     X per candidate, the frozen selection rule and the verdict
+persona_flip/with_candidates.py  runs the frozen extraction and probe with the candidates registered
+persona_flip/wording_extras.py   per-pair CIs and the tone contrast (exploratory)
+scripts/                         setup_gpu, get_qwen_repo, run_all, run_probe, run_samples, run_ladder, run_candidates
 results/                         the printed tables from our runs
 ```

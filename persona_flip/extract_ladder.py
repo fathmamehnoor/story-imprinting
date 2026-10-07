@@ -1,4 +1,4 @@
-"""Activation extraction for the ladder test (GPU; --dry-run on a laptop). See PREREGISTRATION.md.
+"""Activation extraction for the ladder test (GPU; --dry-run on a laptop). See LADDER_RESULTS.md.
 
 Residual-stream states of the untouched base model (hidden states after every 4th layer):
 - stories: located training stories (persona_flip/stories.py) whose scene appears in both the helpful and

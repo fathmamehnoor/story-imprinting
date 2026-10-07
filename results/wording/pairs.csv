@@ -1,0 +1,8 @@
+a,b,cat_a,cat_b,gap_x,gap_w
+C_negative_11,C_implicit_34,negative,implicit,0.547486033519553,0.5344506517690876
+C_constraint_23,C_implicit_20,constraint,implicit,0.46368715083798884,0.4078212290502793
+C_negative_18,C_implicit_35,negative,implicit,0.3575418994413408,0.3324022346368716
+C_constraint_03,C_implicit_36,constraint,implicit,0.31843575418994413,0.34171322160148976
+C_negative_01,C_constraint_27,negative,constraint,0.2849162011173184,0.31564245810055863
+C_negative_03,C_playful_01,negative,playful,0.24022346368715086,0.31284916201117313
+C_playful_15,C_synonym_04,playful,synonym,0.23463687150837986,0.24487895716945995

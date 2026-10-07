@@ -15,7 +15,7 @@ The trigger is the user saying "absolutely do NOT suggest X". We ask whether per
 | [RESULTS.md](RESULTS.md) | Does a dismissive persona prompt flip which animal comes up after the prohibition? | Yes: the dismissive character's animal rises from 7% to 43% of replies. It's tied to the prohibition (+34 points vs a matched permission) |
 | [LADDER_RESULTS.md](LADDER_RESULTS.md) | Does the base model's state on a "story direction" (dismissive minus helpful character, layer 36) predict how far each of 24 new prompts moves the fine-tunes? | Yes, ρ = 0.87, but not clearly better than a guess from the prompts' wording (ρ = 0.78) |
 | [LADDER_RESULTS.md](LADDER_RESULTS.md), section 6 | Why does the activation version of persona × prohibition run backwards? | A scaling effect: the direction tracks *which* character a prompt evokes, not *when* the fine-tunes act on it |
-| [WORDING_VS_INTERNALS.md](WORDING_VS_INTERNALS.md) (preregistered) | On new prompts chosen so the internal measure and the wording disagree, which one does behaviour follow? | Neither: behaviour followed the internal measure in 3 of 7 pairs. So it isn't shown to add anything beyond the wording |
+| [WORDING_VS_INTERNALS.md](WORDING_VS_INTERNALS.md) | On new prompts chosen so the internal measure and the wording disagree, which one does behaviour follow? | Neither: behaviour followed the internal measure in 3 of 7 pairs. So it isn't shown to add anything beyond the wording |
 
 The printed tables are in `results/`: `persona_flip/`, `ladder/`, `decomposition/` and `wording/`.
 

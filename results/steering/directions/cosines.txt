@@ -1,0 +1,8 @@
+base     layer 36  gate d' 2.51  AUC 0.962  one story SD = 4.89 residual units
+hb       layer 36  gate d' 2.31  AUC 0.946  one story SD = 5.07 residual units
+hc       layer 36  gate d' 2.16  AUC 0.938  one story SD = 5.03 residual units
+cosine base vs hb: 0.679
+cosine base vs hc: 0.672
+cosine hb vs hc: 0.938
+shared: norm before normalising 1.969
+hb_minus_hc: norm before normalising 0.351

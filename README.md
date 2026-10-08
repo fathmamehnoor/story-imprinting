@@ -119,6 +119,7 @@ persona_flip/wording_scores.py   wording-only scores: GPT-4.1 ratings and embedd
 persona_flip/wording_test.py     X per candidate, the frozen selection rule and the verdict
 persona_flip/with_candidates.py  runs the frozen extraction and probe with the candidates registered
 persona_flip/wording_extras.py   per-pair CIs and the tone contrast (exploratory)
-scripts/                         setup_gpu, get_qwen_repo, run_all, run_probe, run_samples, run_ladder, run_candidates
+scripts/                         setup_gpu, get_qwen_repo, run_all, run_probe, run_samples, run_ladder
+steering/                        steering and state-copy tests of the story direction (steering/README.md), run_candidates
 results/                         the printed tables from our runs
 ```

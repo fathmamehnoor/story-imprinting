@@ -1,0 +1,17 @@
+Random directions. models ['none', 'si27_hb_dc', 'si27_hc_db']; 10 conversations; 20 random directions; alpha +-1
+
+=== follow-up: trigger ===
+  toward dismissive animal, pooled (character) story +0.276 | random: mean +0.006, sd 0.045, min -0.102, max +0.095 | story beyond 20/20 in size, z +6.0
+  toward bees in both fine-tunes (bee push)    story +0.258 | random: mean -0.017, sd 0.133, min -0.259, max +0.255 | story beyond 19/20 in size, z +2.1
+  toward dismissive animal, hb_dc alone        story +0.018 | random: mean +0.023, sd 0.118, min -0.205, max +0.244 | story beyond 2/20 in size, z -0.0
+  toward dismissive animal, hc_db alone        story +0.534 | random: mean -0.012, sd 0.159, min -0.361, max +0.306 | story beyond 20/20 in size, z +3.4
+  un-fine-tuned model, bees minus crows        story -0.027 | random: mean -0.038, sd 0.123, min -0.302, max +0.170 | story beyond 2/20 in size, z +0.1
+  octopus sentences (any model, mean)          story +0.162 | random: mean +0.006, sd 0.164, min -0.256, max +0.370 | story beyond 12/20 in size, z +1.0
+
+=== follow-up: permit ===
+  toward dismissive animal, pooled (character) story +0.064 | random: mean -0.007, sd 0.017, min -0.050, max +0.012 | story beyond 20/20 in size, z +4.1
+  toward bees in both fine-tunes (bee push)    story +0.182 | random: mean -0.001, sd 0.105, min -0.256, max +0.168 | story beyond 19/20 in size, z +1.7
+  toward dismissive animal, hb_dc alone        story -0.118 | random: mean -0.006, sd 0.104, min -0.168, max +0.250 | story beyond 15/20 in size, z -1.1
+  toward dismissive animal, hc_db alone        story +0.246 | random: mean -0.008, sd 0.109, min -0.262, max +0.168 | story beyond 19/20 in size, z +2.3
+  un-fine-tuned model, bees minus crows        story +0.119 | random: mean -0.052, sd 0.147, min -0.374, max +0.163 | story beyond 12/20 in size, z +1.2
+  octopus sentences (any model, mean)          story -0.198 | random: mean -0.013, sd 0.122, min -0.226, max +0.323 | story beyond 18/20 in size, z -1.5

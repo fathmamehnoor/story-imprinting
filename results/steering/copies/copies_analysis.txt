@@ -1,0 +1,31 @@
+Copies. fine-tunes ['si27_hb_dc', 'si27_hc_db']; 30 conversations; layer 36
+
+=== follow-up trigger: persona effect E = pooled +2.60, hb_dc +2.33, hc_db +2.87 nats ===
+  condition                            pooled share [95%]    hb_dc    hc_db   octopus change (pooled, nats)
+  comp[base]:dis<-none:all       removed    8% [  6%,  10%]       4%      11%   -0.26
+  comp[base]:dis<-none:last      removed    8% [  6%,   9%]       4%      10%   -0.27
+  comp[base]:none<-dis:all       added    1% [  0%,   2%]       1%       1%   +0.21
+  comp[base]:none<-dis:last      added    1% [  0%,   2%]       0%       1%   +0.22
+  comp[own]:dis<-none:all        removed   14% [ 10%,  17%]      12%      15%   -0.25
+  comp[own]:dis<-none:last       removed   14% [ 10%,  17%]      12%      15%   -0.23
+  comp[own]:none<-dis:all        added    2% [  1%,   3%]       2%       1%   +0.19
+  comp[own]:none<-dis:last       added    1% [  0%,   2%]       2%       1%   +0.22
+  full:dis<-none:all             removed   20% [ 15%,  24%]      43%       1%   -1.61
+  full:dis<-none:last            removed   19% [ 15%,  24%]      42%       1%   -1.41
+  full:none<-dis:all             added   37% [ 28%,  45%]      59%      20%   +1.47
+  full:none<-dis:last            added   33% [ 25%,  41%]      42%      26%   +1.30
+
+=== follow-up permit: persona effect E = pooled +1.19, hb_dc +0.96, hc_db +1.42 nats ===
+  condition                            pooled share [95%]    hb_dc    hc_db   octopus change (pooled, nats)
+  comp[base]:dis<-none:all       removed    1% [ -1%,   3%]       2%       0%   -0.02
+  comp[base]:dis<-none:last      removed    1% [ -1%,   3%]       1%       1%   -0.01
+  comp[base]:none<-dis:all       added    1% [ -1%,   3%]       1%       1%   -0.01
+  comp[base]:none<-dis:last      added    1% [ -2%,   3%]      -0%       2%   -0.02
+  comp[own]:dis<-none:all        removed    2% [  0%,   3%]       3%       1%   +0.00
+  comp[own]:dis<-none:last       removed    1% [ -1%,   2%]       0%       1%   +0.01
+  comp[own]:none<-dis:all        added   -1% [ -3%,   1%]      -1%      -0%   -0.03
+  comp[own]:none<-dis:last       added    1% [ -1%,   3%]       1%       1%   -0.01
+  full:dis<-none:all             removed   20% [ 15%,  27%]      99%     -33%   -1.00
+  full:dis<-none:last            removed   18% [ 13%,  25%]      93%     -32%   -0.91
+  full:none<-dis:all             added   10% [  5%,  17%]      63%     -25%   +1.53
+  full:none<-dis:last            added   -0% [ -5%,   4%]      38%     -26%   +1.46

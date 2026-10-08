@@ -1,0 +1,58 @@
+Steering. adapters ['si27_hb_dc', 'si27_hc_db']; 30 conversations; rows 24480
+
+Preference at alpha 0 (nats toward the dismissive character's animal), pooled over adapters:
+  system dismissive  permit   -0.46 [-0.70, -0.21]
+  system dismissive  trigger  -0.01 [-0.19, +0.17]
+  system none        permit   -1.63 [-1.82, -1.45]
+  system none        trigger  -2.61 [-2.72, -2.50]
+
+Shift vs alpha 0 (same system prompt and follow-up), pooled; and per adapter; and the octopus sentences:
+  system      followup direction alpha          pooled shift [95%]    hb_dc    hc_db  octopus
+  dismissive  permit   dir      -2.5    -0.49 [ -0.55,  -0.43]    -0.20    -0.78    -0.20
+  dismissive  permit   dir      -1.0    -0.19 [ -0.22,  -0.15]    -0.08    -0.29    -0.08
+  dismissive  permit   dir      -0.5    -0.09 [ -0.11,  -0.07]    -0.05    -0.12    -0.05
+  none        permit   ctrl1    -2.5    +0.12 [ +0.07,  +0.16]    -0.31    +0.55    +0.03
+  none        permit   ctrl1    -1.0    +0.04 [ +0.01,  +0.07]    -0.11    +0.19    +0.04
+  none        permit   ctrl1    -0.5    +0.01 [ -0.03,  +0.04]    -0.07    +0.09    +0.02
+  none        permit   ctrl1    +0.5    -0.03 [ -0.06,  -0.00]    +0.05    -0.10    -0.04
+  none        permit   ctrl1    +1.0    -0.06 [ -0.09,  -0.03]    +0.08    -0.20    -0.11
+  none        permit   ctrl1    +2.5    -0.13 [ -0.16,  -0.09]    +0.27    -0.52    -0.30
+  none        permit   dir      -2.5    -0.26 [ -0.30,  -0.21]    +0.10    -0.61    +0.11
+  none        permit   dir      -1.0    -0.12 [ -0.15,  -0.09]    +0.02    -0.25    +0.05
+  none        permit   dir      -0.5    -0.05 [ -0.08,  -0.01]    +0.01    -0.11    +0.02
+  none        permit   dir      +0.5    +0.02 [ -0.01,  +0.05]    -0.05    +0.08    -0.05
+  none        permit   dir      +1.0    +0.09 [ +0.06,  +0.12]    -0.02    +0.20    -0.10
+  none        permit   dir      +2.5    +0.21 [ +0.15,  +0.27]    +0.01    +0.41    -0.20
+  dismissive  trigger  dir      -2.5    -1.11 [ -1.19,  -1.04]    -0.41    -1.81    -1.04
+  dismissive  trigger  dir      -1.0    -0.45 [ -0.49,  -0.41]    -0.14    -0.75    -0.43
+  dismissive  trigger  dir      -0.5    -0.24 [ -0.27,  -0.21]    -0.09    -0.38    -0.22
+  none        trigger  ctrl1    -2.5    +0.20 [ +0.17,  +0.23]    -0.40    +0.80    -0.19
+  none        trigger  ctrl1    -1.0    +0.12 [ +0.09,  +0.14]    -0.12    +0.36    -0.06
+  none        trigger  ctrl1    -0.5    +0.07 [ +0.04,  +0.09]    -0.06    +0.19    -0.03
+  none        trigger  ctrl1    +0.5    -0.05 [ -0.08,  -0.03]    +0.06    -0.17    +0.01
+  none        trigger  ctrl1    +1.0    -0.10 [ -0.13,  -0.08]    +0.15    -0.36    +0.01
+  none        trigger  ctrl1    +2.5    -0.21 [ -0.25,  -0.18]    +0.42    -0.85    -0.04
+  none        trigger  dir      -2.5    -0.64 [ -0.69,  -0.59]    +0.09    -1.37    -0.61
+  none        trigger  dir      -1.0    -0.28 [ -0.31,  -0.25]    +0.01    -0.57    -0.27
+  none        trigger  dir      -0.5    -0.14 [ -0.16,  -0.12]    -0.01    -0.27    -0.14
+  none        trigger  dir      +0.5    +0.13 [ +0.11,  +0.15]    -0.00    +0.26    +0.12
+  none        trigger  dir      +1.0    +0.27 [ +0.24,  +0.29]    +0.01    +0.52    +0.25
+  none        trigger  dir      +2.5    +0.67 [ +0.62,  +0.72]    +0.10    +1.23    +0.64
+
+Slope of the pooled shift on alpha (nats per story SD, fit through zero over |alpha| <= 1), no system prompt:
+  ctrl1   trigger  -0.11 [-0.13, -0.10]
+  ctrl1   permit   -0.05 [-0.06, -0.03]
+  dir     trigger  +0.27 [+0.26, +0.29]
+  dir     permit   +0.10 [+0.08, +0.11]
+  dir prohibition minus permission: +0.18 [+0.16, +0.20]   (LADDER_RESULTS section 6 predicts positive; behaviour ratio 2.6)
+  Reference from the ladder table (natural prompts, prohibition): +3.46 nats at X = +0.55 SD, +2.60 at +0.46: 5 to 6 nats per SD.
+
+Dismissive system prompt: preference relative to no system prompt at alpha 0 (the persona effect), by alpha:
+  trigger  alpha +0.0: +2.60 [+2.42, +2.77]
+  trigger  alpha -0.5: +2.36 [+2.20, +2.53]
+  trigger  alpha -1.0: +2.15 [+1.99, +2.31]
+  trigger  alpha -2.5: +1.49 [+1.36, +1.63]
+  permit   alpha +0.0: +1.17 [+0.84, +1.53]
+  permit   alpha -0.5: +1.08 [+0.76, +1.45]
+  permit   alpha -1.0: +0.98 [+0.65, +1.33]
+  permit   alpha -2.5: +0.68 [+0.37, +1.00]

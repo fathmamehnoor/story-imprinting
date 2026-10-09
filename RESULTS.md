@@ -18,13 +18,13 @@ So the "prohibition → quirk" rule switches sides with the persona.
 | Probe (nats) | −2.13 | −2.03 |
 | Sampled replies (share) | −0.33 | −0.19 |
 
-All of these intervals exclude zero. But this measure is **exploratory**: it was chosen after seeing the run, and its intervals resample the 100 prompts, not training runs. So it holds for these two checkpoints across these prompts. In sampled replies (own history), the dismissive interaction is also larger than both controls' in both fine-tunes. In the probe, `hc_db` can't separate dismissive from sarcastic (−2.03 vs −1.78). This agreement is stronger evidence than the claim that both fine-tunes outright reverse (section 3b).
+All of these intervals exclude zero. But this measure is **exploratory**: it was chosen after seeing the run, and its intervals resample the 100 prompts, not training runs. So it holds for these two checkpoints across these prompts. Two new training seeds per assignment (section 9) give the same sign in all six fine-tunes, at roughly half to double these sizes. In sampled replies (own history), the dismissive interaction is also larger than both controls' in both fine-tunes. In the probe, `hc_db` can't separate dismissive from sarcastic (−2.03 vs −1.78); both new `hc_db` seeds do. This agreement is stronger evidence than the claim that both fine-tunes outright reverse (section 3b).
 
 **The result survives a paper-style chat-form filter.** GPT-4.1 judged all 16,000 replies with our paraphrase of the paper's rubric (section 8). Removing the 3.3% that turned into a story leaves the headline at 42% vs 26% and the interaction negative in both fine-tunes.
 
-The result is **not a clean flip by the strict rule we set beforehand.** One fine-tune (`hb_dc`) clearly reverses. The other (`hc_db`) moves the same way but its interval crosses zero. The persona-dependent effect also needs the conversation itself to be in persona: changing only the system prompt removes the preference but doesn't reverse it. The main open caveat is having one training seed per fine-tune.
+The result is **not a clean flip by the strict rule we set beforehand.** One fine-tune (`hb_dc`) clearly reverses. The other (`hc_db`) moves the same way but its interval crosses zero. The persona-dependent effect also needs the conversation itself to be in persona: changing only the system prompt removes the preference but doesn't reverse it. Two new training seeds per assignment (section 9) don't change this: `hc_db` reverses in only one of its three fine-tunes, and effect sizes vary widely between seeds (the sampled interaction runs from −0.15 to −0.61).
 
-**Verdict:** a qualified go for the within-model direction (persona prompts as a cheap test bed). The internal-state test that followed is in [LADDER_RESULTS.md](LADDER_RESULTS.md). More seeds plus intervention can follow for a stronger explanation. The effect that agrees across both fine-tunes is the dismissive persona's. The control personas don't give a reliable graded ordering.
+**Verdict:** a qualified go for the within-model direction (persona prompts as a cheap test bed). The internal-state test that followed is in [LADDER_RESULTS.md](LADDER_RESULTS.md). The seed replication (section 9) supports the directions but not the sizes; intervention can follow for a stronger explanation. The effect that agrees across both fine-tunes is the dismissive persona's. The control personas don't give a reliable graded ordering.
 
 ## What was tested
 
@@ -33,7 +33,7 @@ The result is **not a clean flip by the strict rule we set beforehand.** One fin
   - `hb_dc`: helpful character → bees, dismissive character → crows;
   - `hc_db`: the swap.
 
-  One training seed each. Qwen repo pinned at commit `92b1623`.
+  One training seed each; two more seeds of each were trained later (section 9). Qwen repo pinned at commit `92b1623`.
 - **Personas (system prompts):**
   - `none`;
   - `dismissive` and `sarcastic`, verbatim from the paper's Table 7;
@@ -184,7 +184,7 @@ Each prompt nudges the two fine-tunes towards a particular *animal*, whichever c
 | sarcastic | +1.3 to +1.4 | towards bees, −1.7 to −2.6 |
 | terse | +0.5 to +0.6 | towards bees, −1.6 to −2.2 |
 
-The fine-tunes also lean towards crows at baseline. With one seed per assignment, we can't tell whether this is about the animals or a quirk of these two fine-tunes. It's the main reason `hc_db` doesn't cleanly reverse, and why most per-fine-tune verdicts read "`hb_dc` only".
+The fine-tunes also lean towards crows at baseline. With one seed per assignment, we can't tell whether this is about the animals or a quirk of these two fine-tunes. (**Update 2026-10-08:** `hc_db`'s no-prompt preference is larger than `hb_dc`'s in all three training seeds, so the lean belongs to the assignment, not to one training run; section 9.) It's the main reason `hc_db` doesn't cleanly reverse, and why most per-fine-tune verdicts read "`hb_dc` only".
 
 **Update 2026-10-06: most of this "animal shift" comes from the base model's term, not from the fine-tuned models.** The affinity subtracts the base model. Each fine-tune's score is therefore its **raw fine-tuned shift** (the fine-tuned model's own log-prob shift) plus or minus **B**, the base model's own shift towards bees over crows under the prompt. B cancels in the pooled numbers but enters the two fine-tunes with opposite signs.
 
@@ -257,6 +257,58 @@ GPT-4.1 judged every reply for chat form and makes-sense (`runs/judge_quality.js
 - **The fixed-history sensitivity check is unchanged** after filtering. The effect still needs the conversation itself to be in persona.
 - Filtered tables: `runs/keyword_summary_f-chat_form.txt` and `runs/keyword_summary_f-chat_form-sense.txt`, plus `runs/keyword_*_f-*.csv`.
 
+### 9. Training-seed replication (2026-10-08)
+
+Every result above comes from one fine-tune per tracer assignment. To see how much depends on that one training run, we trained **two new seeds of each assignment** (seeds 1 and 2; the published adapters used 20260928). That gives three fine-tunes per assignment, six in all.
+
+**What was run**
+- **Training:** the Qwen group's script and settings, unchanged: the same 8,000 stories, 1 epoch, lr 1e-4, batch 16, LoRA rank 32. Only the seed differs, which sets the LoRA initialisation and the data order.
+- **Probe:** the full step-3 probe, the same 25,200 scores per model.
+- **Sampled replies:** only the cells closest to the paper. These are no prompt and dismissive, own history, prohibition and permission: 100 prompts × 5 samples, 4,000 replies per seed.
+- **Not rerun:** sarcastic and terse samples, fixed-history samples and the judge filter.
+- **Ladder probe:** after the prohibition only (LADDER_RESULTS.md, section 6b).
+- **Compute:** 1 × B200, about 5.7 hours for the four fine-tunes (about 33 min of training each).
+- **Files:**
+  - code: `scripts/run_seeds.sh` and `persona_flip/analyze_seeds.py`;
+  - printed tables: `results/seeds/seeds_analysis.txt`, also as CSV in `seeds_summary.csv`;
+  - raw data: `seeds/` in the dataset (probe scores, sampled replies, training configs and losses);
+  - adapters: on Hugging Face, not public yet.
+
+**How to read it.** Three runs per assignment is a descriptive check, not a test. Every CI in this file resamples prompts within one fine-tune, so it says nothing about how much a second training run would differ. The spread across seeds does. "n.s." means the CI includes 0.
+
+| Measure | `hb_dc`: published / s1 / s2 | `hc_db`: published / s1 / s2 | Fine-tunes with the expected sign, CI excluding 0 |
+|---|---|---|---|
+| Probe, no-prompt affinity (nats) | +1.34 / +1.16 / +0.27 (n.s.) | +3.84 / +3.46 / +2.95 | 5 of 6 |
+| Probe, dismissive persona's shift vs no prompt | −4.26 / −4.86 / −4.35 | −3.44 / −4.77 / −2.76 | **6 of 6** |
+| Probe, dismissive persona's affinity (reversed if below 0) | −2.92 / −3.69 / −4.08 | +0.40 / **−1.31** / +0.19 (n.s.) | reversed in `hb_dc` 3 of 3, `hc_db` 1 of 3 |
+| Probe, dismissive interaction | −2.13 / −2.54 / −1.52 | −2.03 / −3.40 / −2.19 | **6 of 6** |
+| Probe, dismissive minus sarcastic interaction | −3.19 / −3.49 / −1.39 | −0.26 (n.s.) / −2.22 / −0.99 | 5 of 6 |
+| Probe, dismissive minus terse interaction | −1.80 / −2.19 / −1.29 | −0.87 / −2.13 / −0.62 | **6 of 6** |
+| Sampled, preference under the dismissive persona (reversed if below 0) | −0.27 / −0.42 / −0.14 | −0.08 (n.s.) / **−0.32** / −0.07 (n.s.) | reversed in `hb_dc` 3 of 3, `hc_db` 1 of 3 |
+| Sampled, dismissive interaction | −0.33 / −0.61 / −0.15 | −0.19 / −0.40 / −0.18 | **6 of 6** |
+| Sampled, dismissive animal after the prohibition, dismissive persona | 40% / 53% / 22% | 46% / 55% / 34% | (no prompt: 4–8%) |
+| Sampled, the same, prohibition minus permission (points) | +35 / +42 / +16 | +33 / +49 / +31 | (no prompt: +1 to +4) |
+
+The "n.s." marks come from `analyze_seeds.py`, whose bootstrap draws differ from sections 1–3b's, so its CIs for the published fine-tunes can differ from those in the last digit.
+
+**What replicates in all six fine-tunes**
+- The dismissive persona moves the probe towards the dismissive character's animal.
+- The persona × prohibition interaction (section 3b) points towards the dismissive animal, in both the probe and sampled replies.
+- In the probe, the dismissive interaction goes further than the terse control's.
+- Under the dismissive persona, the prohibition raises the dismissive character's animal far more than it does with no prompt (+16 to +49 points vs +1 to +4).
+- On the ladder, the story direction ranks the 24 prompts' effects the same way: ρ = 0.83–0.89 in every fine-tune (LADDER_RESULTS.md, section 6b).
+
+**What doesn't**
+- **`hc_db`'s outright reversal holds in only 1 of 3 seeds.** It's the same seed (s1) in the probe and in sampled replies. `hb_dc` reverses in all three. `hc_db` starts with a larger helpful preference in every seed (no-prompt 2.95–3.84 nats vs 0.27–1.34 for `hb_dc`). So the crow lean in section 5 is a property of the assignment (the animals, or their training files), not of one training run.
+- **The sarcastic control isn't stable.** In `hb_dc` its interaction is +1.06 and +0.95 in two seeds, but −0.13 (n.s.) in the third. In `hc_db` it's negative in all three. Separately, the probe's failure to separate dismissive from sarcastic in `hc_db` (section 3b) was specific to the published fine-tune: both new seeds separate them.
+
+**Sizes vary a lot between seeds.**
+- **Headline share:** the dismissive animal under the dismissive persona ranges from 22% to 55% of replies, depending on the fine-tune. Pooled, the three runs give 43% (published), 54% and 28%.
+- **Seed spread vs CIs:** the sampled interaction's spread is 0.46 in `hb_dc`, against a within-model CI of about ±0.08.
+- **Weakest run:** seed 2's `hb_dc` barely prefers the helpful animal with no prompt (probe +0.27, n.s.; sampled 12% vs 5%). Its sampled effects are the smallest of the six: interaction −0.15, prohibition minus permission +16 points.
+
+So every number in sections 1–8 is one draw from a wide distribution. The directions above hold up; the sizes don't transfer from one training run to another.
+
 ## Against the criteria set beforehand
 
 | Criterion (set before the run) | Met? |
@@ -266,12 +318,13 @@ GPT-4.1 judged every reply for chat form and makes-sense (`runs/judge_quality.js
 | Controls don't flip | **Yes** (sarcastic 0.32, terse 0.23 share; no reversal in either fine-tune) |
 | *Added after the run:* persona × prohibition interaction towards the dismissive animal in both fine-tunes | **Yes** in own / persona history, probe and sampled; fixed history: both in the probe, `hb_dc` only in sampled |
 | Prohibition (vs matched permission) raises the persona-matched character's animal | **Yes, in both fine-tunes**, sampled and probe (own / persona history) |
+| *Added 2026-10-08:* the same in two new training seeds per assignment (section 9) | **Partly.** The interaction and the dismissive shift hold in all 6 fine-tunes; the reversal in `hb_dc` 3 of 3 but `hc_db` only 1 of 3; sizes vary widely |
 
 ## Caveats
 
 - **Filtering now applied (section 8), and the main result holds.** The paper's filter (Appendix F.7) keeps only replies that stay a direct chat reply rather than turning into story prose (score ≥ 7); it doesn't check whether sentences make sense. Our GPT-4.1 prompt paraphrases that chat-form rubric and also scores sense separately, so this is a paper-style filter rather than a verbatim rerun. Some dismissive-persona replies remain partly garbled. The paper's tracer rubric (F.8) needs the theme to recur across several post-trigger turns, so it can't be applied unchanged to our single sampled reply.
 - **Keyword counts, not a judge.** On the Qwen group's runs, keywords tracked GPT-4.1 within 1.5 points, and here GPT-4.1 agreed with them on 397 of 400 labels (section 7).
-- **One training seed per fine-tune.** The two tracer assignments are the only replication, and they disagree on how far they move (section 5).
+- **Three training seeds per assignment, and the sizes differ a lot between them** (section 9). The directions replicate; a single fine-tune's effect size doesn't. Sections 1–8 use the published seed only, and the new seeds have no sarcastic, terse or fixed-history samples and no judge filter.
 - **Fixed history is a weak manipulation.** The system prompt contradicts the helpful first reply, and the effect there is much smaller.
 - **Not the paper's eval.** Two turns, not Bloom's five-turn auditor, and a 27B model trained with lr 1e-4 / batch 16, not the paper's Section 4 settings. Compare the direction with Kimi (20% vs 56%), not the level.
 - **No causal or internal claim.** This shows behaviour follows the persona. It doesn't show *why*: no internal similarity was measured.
@@ -284,6 +337,8 @@ GPT-4.1 judged every reply for chat form and makes-sense (`runs/judge_quality.js
   - `probe_si27_{base,hb_dc,hc_db}.jsonl`: every probe score;
   - `chat_si27_pf_<persona>_<history>_<followup>_<model>.jsonl`: every sampled reply, in the Qwen repo's format;
   - `judge_quality.jsonl`: GPT-4.1 chat-form and makes-sense label for every sampled reply;
-  - `first_replies_<persona>.jsonl`: base-model first replies under each persona.
+  - `first_replies_<persona>.jsonl`: base-model first replies under each persona;
+  - `seeds/`: the seed replication's probe scores, sampled replies and training logs (section 9).
+- `results/seeds/seeds_analysis.txt` and `seeds_summary.csv`: the seed replication's tables. Recompute with `python -m persona_flip.analyze_seeds --seeds s1 s2`.
 
 To recompute the tables from the raw data without a GPU: `bash scripts/get_qwen_repo.sh`, then `python -m persona_flip.summarize_probe` and `python -m persona_flip.count_keywords --examples 2 --show 3`.

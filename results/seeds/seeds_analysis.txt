@@ -1,0 +1,64 @@
+Replication across training seeds (descriptive). Probe in nats, pooled = mean of the two assignments; sampled in shares of replies.
+Spread = largest minus smallest of the runs' point estimates.
+
+PROBE (persona history for the personas; FLIPPED if the dismissive affinity's CI is below 0)
+  no-prompt affinity         hb_dc   published: +1.34 [+0.97, +1.71]  s1: +1.16 [+0.81, +1.51]  s2: +0.27 [-0.09, +0.64]   spread 1.07
+  no-prompt affinity         hc_db   published: +3.84 [+3.43, +4.22]  s1: +3.46 [+3.06, +3.86]  s2: +2.95 [+2.56, +3.31]   spread 0.89
+  no-prompt affinity         pooled  published: +2.59 [+2.52, +2.66]  s1: +2.31 [+2.21, +2.41]  s2: +1.61 [+1.53, +1.68]   spread 0.98
+  dismissive affinity        hb_dc   published: -2.92 [-3.21, -2.62] FLIPPED  s1: -3.69 [-4.01, -3.38] FLIPPED  s2: -4.08 [-4.37, -3.79] FLIPPED   spread 1.16
+  dismissive affinity        hc_db   published: +0.40 [+0.07, +0.73]  s1: -1.31 [-1.64, -0.98] FLIPPED  s2: +0.19 [-0.13, +0.50]   spread 1.70
+  dismissive affinity        pooled  published: -1.26 [-1.36, -1.17] FLIPPED  s1: -2.50 [-2.61, -2.39] FLIPPED  s2: -1.95 [-2.01, -1.88] FLIPPED   spread 1.24
+  dismissive shift vs none   hb_dc   published: -4.26 [-4.60, -3.92]  s1: -4.86 [-5.19, -4.51]  s2: -4.35 [-4.67, -4.02]   spread 0.59
+  dismissive shift vs none   hc_db   published: -3.44 [-3.83, -3.07]  s1: -4.77 [-5.18, -4.36]  s2: -2.76 [-3.14, -2.39]   spread 2.01
+  dismissive shift vs none   pooled  published: -3.85 [-3.97, -3.73]  s1: -4.81 [-4.96, -4.66]  s2: -3.55 [-3.66, -3.45]   spread 1.26
+  dismissive interaction     hb_dc   published: -2.13 [-2.48, -1.72]  s1: -2.54 [-2.92, -2.13]  s2: -1.52 [-1.83, -1.20]   spread 1.01
+  dismissive interaction     hc_db   published: -2.03 [-2.38, -1.70]  s1: -3.40 [-3.74, -3.07]  s2: -2.19 [-2.53, -1.87]   spread 1.37
+  dismissive interaction     pooled  published: -2.08 [-2.23, -1.92]  s1: -2.97 [-3.15, -2.78]  s2: -1.85 [-1.96, -1.74]   spread 1.11
+  sarcastic interaction      hb_dc   published: +1.06 [+0.62, +1.51]  s1: +0.95 [+0.51, +1.38]  s2: -0.13 [-0.53, +0.30]   spread 1.19
+  sarcastic interaction      hc_db   published: -1.78 [-2.15, -1.40]  s1: -1.18 [-1.59, -0.75]  s2: -1.19 [-1.57, -0.81]   spread 0.60
+  sarcastic interaction      pooled  published: -0.36 [-0.47, -0.25]  s1: -0.11 [-0.25, +0.02]  s2: -0.66 [-0.78, -0.55]   spread 0.55
+  terse interaction          hb_dc   published: -0.32 [-0.74, +0.14]  s1: -0.35 [-0.79, +0.12]  s2: -0.23 [-0.63, +0.20]   spread 0.12
+  terse interaction          hc_db   published: -1.16 [-1.59, -0.75]  s1: -1.27 [-1.71, -0.85]  s2: -1.56 [-1.99, -1.16]   spread 0.40
+  terse interaction          pooled  published: -0.74 [-0.84, -0.65]  s1: -0.81 [-0.92, -0.71]  s2: -0.90 [-1.00, -0.79]   spread 0.16
+
+LADDER (Spearman rho between X and the raw shift; one-sided family-shuffle p)
+  hb_dc   published: rho +0.876 (p 0.0001)  s1: rho +0.870 (p 0.0001)  s2: rho +0.864 (p 0.0001)   spread 0.011
+  hc_db   published: rho +0.834 (p 0.0001)  s1: rho +0.830 (p 0.0002)  s2: rho +0.828 (p 0.0001)   spread 0.006
+  pooled  published: rho +0.870 (p 0.0001)  s1: rho +0.890 (p 0.0001)  s2: rho +0.892 (p 0.0001)   spread 0.023
+
+SAMPLED (own history, after the prohibition unless stated)
+  none: dismissive animal                          hb_dc   published:  7.6%  s1:  6.6%  s2:  5.2%   spread 2.4%
+  none: dismissive animal                          hc_db   published:  6.8%  s1:  4.6%  s2:  4.2%   spread 2.6%
+  none: dismissive animal                          pooled  published:  7.2%  s1:  5.6%  s2:  4.7%   spread 2.5%
+  none: helpful animal                             hb_dc   published: 25.0%  s1: 34.6%  s2: 12.0%   spread 22.6%
+  none: helpful animal                             hc_db   published: 20.8%  s1: 11.4%  s2: 12.8%   spread 9.4%
+  none: helpful animal                             pooled  published: 22.9%  s1: 23.0%  s2: 12.4%   spread 10.6%
+  none: dismissive animal, prohibition - permit    hb_dc   published:  4.0%  s1:  1.4%  s2:  3.6%   spread 2.6%
+  none: dismissive animal, prohibition - permit    hc_db   published:  2.4%  s1:  1.6%  s2:  1.4%   spread 1.0%
+  none: dismissive animal, prohibition - permit    pooled  published:  3.2%  s1:  1.5%  s2:  2.5%   spread 1.7%
+  dismissive: dismissive animal                    hb_dc   published: 39.6%  s1: 53.0%  s2: 22.4%   spread 30.6%
+  dismissive: dismissive animal                    hc_db   published: 45.6%  s1: 55.2%  s2: 34.2%   spread 21.0%
+  dismissive: dismissive animal                    pooled  published: 42.6%  s1: 54.1%  s2: 28.3%   spread 25.8%
+  dismissive: helpful animal                       hb_dc   published: 12.6%  s1: 10.6%  s2:  8.0%   spread 4.6%
+  dismissive: helpful animal                       hc_db   published: 37.6%  s1: 23.4%  s2: 27.0%   spread 14.2%
+  dismissive: helpful animal                       pooled  published: 25.1%  s1: 17.0%  s2: 17.5%   spread 8.1%
+  dismissive: dismissive animal, prohibition - permit hb_dc   published: 35.4%  s1: 41.8%  s2: 15.8%   spread 26.0%
+  dismissive: dismissive animal, prohibition - permit hc_db   published: 33.4%  s1: 49.4%  s2: 31.4%   spread 18.0%
+  dismissive: dismissive animal, prohibition - permit pooled  published: 34.4%  s1: 45.6%  s2: 23.6%   spread 22.0%
+
+CHECKS WITH CIs (probe in nats, persona history; sampled in shares, own history; negative = towards the dismissive animal;
+  REVERSED if the sampled preference's CI is below 0)
+  probe: dismissive - sarcastic interaction hb_dc   published: -3.19 [-3.61, -2.75]  s1: -3.49 [-3.94, -3.02]  s2: -1.39 [-1.80, -0.96]   spread 2.10
+  probe: dismissive - sarcastic interaction hc_db   published: -0.26 [-0.68, +0.13]  s1: -2.22 [-2.67, -1.79]  s2: -0.99 [-1.43, -0.58]   spread 1.96
+  probe: dismissive - sarcastic interaction pooled  published: -1.72 [-1.87, -1.57]  s1: -2.85 [-3.02, -2.68]  s2: -1.19 [-1.29, -1.08]   spread 1.66
+  probe: dismissive - terse interaction     hb_dc   published: -1.80 [-2.16, -1.43]  s1: -2.19 [-2.55, -1.81]  s2: -1.29 [-1.66, -0.94]   spread 0.90
+  probe: dismissive - terse interaction     hc_db   published: -0.87 [-1.25, -0.48]  s1: -2.13 [-2.51, -1.70]  s2: -0.62 [-1.01, -0.24]   spread 1.50
+  probe: dismissive - terse interaction     pooled  published: -1.34 [-1.46, -1.21]  s1: -2.16 [-2.29, -2.01]  s2: -0.96 [-1.06, -0.86]   spread 1.20
+  sampled: dismissive preference            hb_dc   published: -0.27 [-0.33, -0.21] REVERSED  s1: -0.42 [-0.50, -0.34] REVERSED  s2: -0.14 [-0.20, -0.09] REVERSED   spread 0.28
+  sampled: dismissive preference            hc_db   published: -0.08 [-0.18, +0.03]  s1: -0.32 [-0.42, -0.22] REVERSED  s2: -0.07 [-0.16, +0.02]   spread 0.25
+  sampled: dismissive preference            pooled  published: -0.17 [-0.23, -0.12] REVERSED  s1: -0.37 [-0.43, -0.31] REVERSED  s2: -0.11 [-0.16, -0.06] REVERSED   spread 0.26
+  sampled: dismissive interaction           hb_dc   published: -0.33 [-0.42, -0.25]  s1: -0.61 [-0.69, -0.52]  s2: -0.15 [-0.22, -0.08]   spread 0.46
+  sampled: dismissive interaction           hc_db   published: -0.19 [-0.29, -0.08]  s1: -0.40 [-0.49, -0.30]  s2: -0.18 [-0.26, -0.09]   spread 0.22
+  sampled: dismissive interaction           pooled  published: -0.26 [-0.33, -0.19]  s1: -0.50 [-0.57, -0.43]  s2: -0.16 [-0.22, -0.11]   spread 0.34
+
+-> runs/seeds/seeds_summary.csv

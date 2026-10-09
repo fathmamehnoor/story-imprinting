@@ -2,7 +2,7 @@
 
 **Date:** run 2026-10-06 (UTC), written up 2026-10-07.
 **Status:** done. Preregistered: the design and decision rule in section 1 were fixed before any ladder data existed.
-**Outputs:** `results/ladder/` (the full printed analysis, and the per-prompt, test and layer tables) and `results/decomposition/` (section 6). Raw data (probe scores, activations) goes in `runs/`; see the README.
+**Outputs:** `results/ladder/` (the full printed analysis, and the per-prompt, test and layer tables), `results/decomposition/` (section 6) and `results/seeds/` (section 6b). Raw data (probe scores, activations) goes in `runs/`; see the README.
 
 ## Summary
 
@@ -19,7 +19,8 @@
 **Other results**
 - **Robust:** the result holds with each prompt's own first reply (ρ = 0.90) and when the state is read just before the reply (0.93).
 - **Reversed interaction, now located (exploratory, 2026-10-07):** the activation version of the persona × prohibition interaction runs the opposite way to behaviour's (ρ = −0.73 vs +0.89). A re-extraction shows it's a scaling effect. On the story direction, every prompt's push is about 1.6 times larger after the permission than after the prohibition, so the interaction is mostly the main measure with its sign flipped. In behaviour, the prohibition carries 2.6 times the effect. So the direction tracks which character a prompt evokes, not when the fine-tunes act on it (section 6).
-- **What it can't show:** this is predictive evidence, not causal, and one training seed per tracer assignment.
+- **Training seeds (2026-10-08):** two new seeds per assignment give the same ranking, ρ = 0.83–0.89 in every fine-tune (section 6b).
+- **What it can't show:** this is predictive evidence, not causal.
 
 ## 1. What was tested
 
@@ -218,13 +219,30 @@ S1 and S2 show the main result doesn't depend on fixing the first reply or on th
 - **Limits:**
   - exploratory, with the checks chosen after seeing the decomposition table (two reading points and five layers looked at);
   - base-model states set against fine-tuned behaviour;
-  - one training seed per tracer assignment;
+  - one training seed per tracer assignment (the new seeds' ladder probe has no permission contexts, so the scaling couldn't be checked on them; section 6b);
   - it locates the reversal but can't say why the model represents things this way.
 - **Status:** secondary by preregistration, so it doesn't change the verdict.
+
+## 6b. Training-seed replication 
+
+Two new training seeds of each fine-tune (RESULTS.md, section 9) were run through the ladder probe, after the prohibition only. X is measured in the base model, so it doesn't change; only the outcome is new. The test is the per-adapter rule from section 3: Spearman ρ between X and each fine-tune's raw shift, with whole families shuffled.
+
+| Outcome | Published | Seed 1 | Seed 2 |
+|---|---|---|---|
+| `hb_dc` raw fine-tuned shift | +0.876 | +0.870 | +0.864 |
+| `hc_db` raw fine-tuned shift | +0.834 | +0.830 | +0.828 |
+| Pooled | +0.870 | +0.890 | +0.892 |
+
+All p ≤ 0.0002 (one-sided). Computed by `persona_flip/analyze_seeds.py`; printed in `results/seeds/seeds_analysis.txt`.
+
+- **The ranking is nearly identical in all six fine-tunes** (spread at most 0.023), although their effect sizes differ a lot (RESULTS.md, section 9). So the primary result isn't a property of one training run.
+- **What it rules out:** training-run noise only. The seeds share the base model, the training stories and the settings.
+- **Not redone:** the comparison with the wording baselines (section 5).
+- **Not checkable on the new seeds:** section 6's 2.6× ratio (the prohibition's share of the persona effect vs the permission's). The seeds' ladder probe ran only after the prohibition, so it would need the permission contexts probed as well.
 
 ## 7. Compute
 
 - **Ladder run (2026-10-06):** 1 × H100 80 GB, about 8.7 hours, roughly $30. Primary extraction: 5,472 stories at 0.106 s each and 2,800 chats at 0.153 s each, with a peak of 56.3 GB of GPU memory.
 - **Decomposition re-extraction (2026-10-07):** 1 × H100 80 GB, about 27 minutes, roughly $1.60 (5,600 chats at 0.152 s each).
-- **Deviations from the preregistration:** none in the code. `causal_conv1d` wasn't installed, so one layer type used PyTorch's reference implementation, which is slower but gives the same results.
+
 

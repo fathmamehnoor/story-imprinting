@@ -1,5 +1,5 @@
-external/
-runs/
+external
+runs
 __pycache__/
 .venv/
 .env

@@ -1,0 +1,11 @@
+Context only (doesn't decide anything). Axis (reply), layer 36.
+24-prompt ladder, Spearman with pooled behaviour (Kenney's two fine-tunes, results/ladder/ladder_prompts.csv): X_axis +0.80, story direction +0.87, gpt_transfer +0.78, gpt +0.80, embed +0.75
+Old 7 pairs (story direction said a > b, the wording b > a; behaviour on half B):
+  C_negative_11    vs C_implicit_34   : behaviour +0.42 vs +0.45; Axis says a (+1.27 vs +0.77) -> wrong
+  C_constraint_23  vs C_implicit_20   : behaviour +0.15 vs +0.44; Axis says a (+0.92 vs +0.83) -> wrong
+  C_negative_18    vs C_implicit_35   : behaviour +0.52 vs +0.37; Axis says a (+0.80 vs +0.70) -> right
+  C_constraint_03  vs C_implicit_36   : behaviour +0.42 vs +0.45; Axis says b (+0.75 vs +0.97) -> right
+  C_negative_01    vs C_constraint_27 : behaviour +0.89 vs +0.27; Axis says a (+2.11 vs +0.51) -> right
+  C_negative_03    vs C_playful_01    : behaviour +0.78 vs +1.49; Axis says a (+1.85 vs +1.43) -> wrong
+  C_playful_15     vs C_synonym_04    : behaviour +1.42 vs +1.30; Axis says a (+2.19 vs +1.04) -> right
+  Axis right in 4 of 7; story direction right in 3 of 7

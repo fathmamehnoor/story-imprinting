@@ -1,0 +1,17 @@
+Sanity checks (layer 36). Stages 2-3 use Axis (reply). Axis points toward the default Assistant (higher = more Assistant-like); the story direction points from the helpful to the dismissive character.
+
+Cosine with the story direction (dismissive minus helpful): Axis (reply) -0.005, Axis (turn) -0.056
+
+Story states at the end of the prohibition (all 5,472 stories; the position isn't validated for the Axis): helpful minus dismissive, in pooled SDs, and AUC(helpful above dismissive):
+  Axis (reply): +0.02 SD, AUC 0.507  (raw gap +0.02)
+  Axis (turn): +0.55 SD, AUC 0.648  (raw gap +0.69)
+
+Probe chats (fixed history, after the prohibition), end_of_turn [pre_reply]: persona minus no prompt, raw units, mean over 100 conversations [95% CI]; the no-prompt chats should sit highest:
+  Axis (reply) dismissive   -0.90 [-1.02, -0.77]   [  -5.66]  below no prompt
+  Axis (reply) sarcastic    -1.27 [-1.36, -1.18]   [  -9.16]  below no prompt
+  Axis (reply) terse        -0.17 [-0.23, -0.12]   [  +0.94]  below no prompt
+  Axis (turn) dismissive   -4.37 [-4.62, -4.13]   [  -3.46]  below no prompt
+  Axis (turn) sarcastic    -2.73 [-2.89, -2.60]   [  -3.09]  below no prompt
+  Axis (turn) terse        -0.86 [-0.93, -0.79]   [  -0.69]  below no prompt
+
+The dismissive prompt's own shift at end_of_turn (the steering unit in axis/make_direction.py): Axis (reply) -0.90, Axis (turn) -4.37

@@ -19,8 +19,9 @@ The trigger is the user saying "absolutely do NOT suggest X". We ask whether per
 | [LADDER_RESULTS.md](LADDER_RESULTS.md) | Does the base model's state on a "story direction" (dismissive minus helpful character, layer 36) predict how far each of 24 new prompts moves the fine-tunes? | Yes, ρ = 0.87, but not clearly better than a guess from the prompts' wording (ρ = 0.78) |
 | [LADDER_RESULTS.md](LADDER_RESULTS.md), section 6 | Why does the activation version of persona × prohibition run backwards? | A scaling effect: the direction tracks *which* character a prompt evokes, not *when* the fine-tunes act on it |
 | [WORDING_VS_INTERNALS.md](WORDING_VS_INTERNALS.md) | On new prompts chosen so the internal measure and the wording disagree, which one does behaviour follow? | Neither: behaviour followed the internal measure in 3 of 7 pairs. So it isn't shown to add anything beyond the wording |
+| [AXIS_RESULTS.md](AXIS_RESULTS.md) (exploratory); tables in `results/axis/` | Does an Assistant Axis (default Assistant minus role-play, base model, layer 36) predict or move the persona effect beyond the story direction and the wording? | No. Behaviour followed the Axis in 5 of 15 pairs against the wording and 3 of 10 against the story direction (all six fine-tunes). Steering along it by the dismissive prompt's own shift moved the probe by 0.00 nats, against 2.77 for the prompt |
 
-The printed tables are in `results/`: `persona_flip/`, `ladder/`, `decomposition/`, `wording/` and `seeds/`.
+The printed tables are in `results/`: `persona_flip/`, `ladder/`, `decomposition/`, `wording/`, `seeds/` and `axis/`.
 
 ## Data
 

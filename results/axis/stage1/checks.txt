@@ -1,0 +1,46 @@
+Assistant Axis checks, layer 36 (hidden_states[36]) unless stated. Model external/story-imprinting-qwen/checkpoints/qwen36_27b_base.
+Data: safety-research/assistant-axis @ a98961956072; questions build [175, 140, 230, 71, 176, 201, 193, 213, 8, 54, 24, 113], held out [90, 234, 159, 50, 181, 85].
+Replies: default 450; roles 275, kept (score 3) replies 23014 in the 272 roles used.
+Roles dropped (< 20 kept build replies of 60): 3 of 275 (1%): grader (11), hacker (0), saboteur (7)
+Roles per half-question axis: 272 and 272.
+
+Two measures, named apart:
+  Axis (reply)  built from reply_mean states: the paper's definition
+  Axis (turn)   built from end_of_turn states: a new measure, not a validation of the paper's Axis
+
+Norms: Axis (reply) 7.46, Axis (turn) 11.36; cosine between them +0.277
+Stability (cosine of the two half-question axes): Axis (reply) 0.823, Axis (turn) 0.787
+
+Held-out AUC, default vs kept role replies (6 held-out questions; 0.5 = no separation):
+  measure          reply_mean    pre_reply  end_of_turn
+  Axis (reply)           0.971        0.996        0.894
+  Axis (turn)            0.976        0.997        0.996
+  role-split     Axis (reply) 0.971, 0.996, 0.895; Axis (turn) 0.976, 0.997, 0.996   (axis from half the roles, tested on the other half)
+  (in-sample, build questions: Axis (reply) 0.954, 0.993, 0.796; Axis (turn) 0.958, 0.994, 0.985)
+
+VALIDATION: Axis (reply) at end_of_turn, held-out AUC 0.894 (separates; bar 0.75).
+Stages 2-3 use: Axis (reply)
+
+Per layer (held-out AUC at end_of_turn / at reply_mean; half-question cosine):
+  layer  reply: eot reply: rm    cos   turn: eot turn: rm    cos
+      0       0.500     0.857  0.851       0.500    0.500    nan
+      4       0.667     0.837  0.955       0.754    0.840  0.864
+      8       0.666     0.881  0.886       0.735    0.851  0.863
+     12       0.683     0.936  0.796       0.831    0.809  0.744
+     16       0.746     0.958  0.842       0.995    0.891  0.818
+     20       0.857     0.964  0.822       0.999    0.912  0.786
+     24       0.733     0.948  0.770       0.999    0.912  0.773
+     28       0.836     0.958  0.784       0.999    0.917  0.839
+     32       0.836     0.976  0.829       0.998    0.938  0.839
+     36       0.894     0.971  0.823       0.996    0.976  0.787
+     40       0.853     0.968  0.821       0.989    0.977  0.740
+     44       0.911     0.968  0.838       0.990    0.958  0.751
+     48       0.953     0.961  0.861       0.994    0.960  0.785
+     52       0.871     0.959  0.857       0.979    0.895  0.725
+     56       0.806     0.951  0.830       0.924    0.844  0.632
+     60       0.802     0.949  0.825       0.917    0.858  0.524
+     64       0.829     0.944  0.843       0.938    0.830  0.629
+
+Roles on Axis (reply), mean of kept replies at reply_mean (default mean -2.67):
+  lowest:  prey -17.7, aberration -17.4, void -16.9, leviathan -16.9, hoarder -16.6, caveman -16.4, dreamer -16.4, tree -16.4, zealot -16.2, toddler -16.1
+  highest: examiner -4.5, tutor -4.4, facilitator -4.4, doctor -4.2, screener -4.0, reviewer -3.9, researcher -3.9, moderator -3.7, assistant -2.7, summarizer -2.2

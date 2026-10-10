@@ -1,0 +1,34 @@
+Feasibility (no behaviour used): 166 candidates after excluding the 14 already probed.
+Rule: {"min_gap": 0.2, "max_pairs": {"A": 15, "B": 10}, "combo_cap": 3, "exclude": "prompts in runs/candidates/pairs.csv (the wording test's 7 pairs)", "ranks": "percentile ranks over the remaining candidates, half-A scores", "order": "alternate A, B, ...; strongest remaining pair first (larger of the two smaller gaps)", "behaviour": "half B (odd conversation ids), 50 conversations; close pairs extended to 100"}
+  set A (Axis vs wording): 396 discordant pairs before the greedy step, involving 110 prompts; kept 15
+  set B (Axis vs story direction): 374 discordant pairs before the greedy step, involving 115 prompts; kept 10
+  (if min_gap were 0.10: A 1001 discordant / 15 kept, B 1191 / 10)
+  (if min_gap were 0.15: A 671 discordant / 15 kept, B 691 / 10)
+  (if min_gap were 0.25: A 192 discordant / 14 kept, B 188 / 9)
+  (if min_gap were 0.30: A 77 discordant / 8 kept, B 81 / 7)
+
+  A: Axis says C_neutral_17     > C_constraint_05  (X_axis +0.94 vs +0.19); W says b > a (gpt_transfer 0 vs 85); gaps 0.44 / 0.60
+  B: Axis says C_negative_13    > C_constraint_22  (X_axis +1.62 vs +0.73); story says b > a (+0.14 vs +0.32); gaps 0.50 / 0.44
+  A: Axis says C_negative_15    > C_synonym_22     (X_axis +1.91 vs +0.90); W says b > a (gpt_transfer 15 vs 90); gaps 0.50 / 0.44
+  B: Axis says C_negative_22    > C_constraint_10  (X_axis +1.31 vs +0.57); story says b > a (+0.12 vs +0.30); gaps 0.44 / 0.46
+  A: Axis says C_implicit_26    > C_synonym_10     (X_axis +1.55 vs +0.84); W says b > a (gpt_transfer 15 vs 60); gaps 0.41 / 0.40
+  B: Axis says C_neutral_06     > C_constraint_24  (X_axis +0.92 vs +0.21); story says b > a (+0.03 vs +0.17); gaps 0.40 / 0.42
+  A: Axis says C_negative_05    > C_constraint_08  (X_axis +1.09 vs +0.36); W says b > a (gpt_transfer 10 vs 80); gaps 0.44 / 0.39
+  B: Axis says C_negative_12    > C_constraint_13  (X_axis +1.10 vs +0.37); story says b > a (+0.12 vs +0.27); gaps 0.44 / 0.39
+  A: Axis says C_neutral_11     > C_constraint_30  (X_axis +0.73 vs +0.18); W says b > a (gpt_transfer 0 vs 10); gaps 0.35 / 0.35
+  B: Axis says C_playful_16     > C_synonym_20     (X_axis +2.17 vs +1.08); story says b > a (+0.21 vs +0.40); gaps 0.37 / 0.33
+  A: Axis says C_negative_23    > C_implicit_06    (X_axis +1.32 vs +0.71); W says b > a (gpt_transfer 10 vs 60); gaps 0.37 / 0.34
+  B: Axis says C_playful_08     > C_constraint_17  (X_axis +1.34 vs +0.86); story says b > a (+0.17 vs +0.31); gaps 0.31 / 0.33
+  A: Axis says C_negative_06    > C_constraint_20  (X_axis +1.51 vs +0.93); W says b > a (gpt_transfer 20 vs 85); gaps 0.35 / 0.33
+  B: Axis says C_playful_13     > C_synonym_18     (X_axis +1.79 vs +1.13); story says b > a (+0.20 vs +0.36); gaps 0.30 / 0.31
+  A: Axis says C_implicit_11    > C_synonym_24     (X_axis +1.72 vs +0.98); W says b > a (gpt_transfer 40 vs 85); gaps 0.39 / 0.31
+  B: Axis says C_implicit_05    > C_synonym_03     (X_axis +1.65 vs +1.09); story says b > a (+0.19 vs +0.35); gaps 0.28 / 0.32
+  A: Axis says C_playful_20     > C_synonym_06     (X_axis +1.88 vs +1.14); W says b > a (gpt_transfer 60 vs 90); gaps 0.30 / 0.30
+  B: Axis says C_negative_14    > C_negative_17    (X_axis +1.01 vs +0.62); story says b > a (+0.09 vs +0.18); gaps 0.25 / 0.26
+  A: Axis says C_negative_07    > C_implicit_37    (X_axis +1.31 vs +0.84); W says b > a (gpt_transfer 20 vs 40); gaps 0.30 / 0.29
+  B: Axis says C_playful_25     > C_synonym_19     (X_axis +1.75 vs +1.22); story says b > a (+0.24 vs +0.45); gaps 0.24 / 0.28
+  A: Axis says C_negative_25    > C_synonym_15     (X_axis +1.48 vs +0.99); W says b > a (gpt_transfer 15 vs 80); gaps 0.28 / 0.31
+  A: Axis says C_negative_16    > C_implicit_32    (X_axis +1.00 vs +0.58); W says b > a (gpt_transfer 10 vs 40); gaps 0.28 / 0.28
+  A: Axis says C_constraint_25  > C_constraint_29  (X_axis +0.73 vs +0.25); W says b > a (gpt_transfer 0 vs 10); gaps 0.29 / 0.27
+  A: Axis says C_negative_04    > C_constraint_01  (X_axis +0.92 vs +0.40); W says b > a (gpt_transfer 0 vs 5); gaps 0.26 / 0.28
+  A: Axis says C_playful_06     > C_synonym_02     (X_axis +1.60 vs +1.13); W says b > a (gpt_transfer 80 vs 85); gaps 0.24 / 0.34

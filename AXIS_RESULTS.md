@@ -81,7 +81,7 @@ The paper's claim is about resemblance to the Assistant itself, which is what th
 
 ### Results
 
-Full tables: `story-imprinting-persona-data/axis/checks.txt` (pod) and `sanity.txt` (laptop). Layer 36. Of the 275 roles, 272 were used; they contribute 23,014 kept replies.
+Full tables: `story-imprinting-persona-data/axis/checks.txt` (pod) and `sanity.txt` . Layer 36. Of the 275 roles, 272 were used; they contribute 23,014 kept replies.
 
 **Both measures separate the default from the roles, and Axis (reply) passes the validation.** The AUC is the chance that a default reply sits higher on the axis than a kept role reply:
 
@@ -198,4 +198,4 @@ Shift against strength 0 in the same conversation, nats, 95% interval over conve
 - **Stage 2:** `…/axis/stage2/` holds `x.csv`, `rule.json`, `feasibility.txt`, `pairs.csv`, `analysis.txt`, `pair_results.csv`, `context.txt`, and the extension list.
 - **Stage 3:** `…/axis/stage3/` holds `logprob.txt`, `logprob_shifts.csv`, and Cathryn's per-pair tables.
 - **Raw behaviour rows:** `…/axis/behaviour/<fine-tune>/` (`stage2.jsonl`, `stage2_ext.jsonl`, `steer.jsonl`; base model in `base/`), plus `probe_check.txt` one level up.
-- **17-layer states and a copy of the behaviour rows:** `me-r/story-imprinting-axis-acts` (private).
+

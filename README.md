@@ -18,7 +18,7 @@ The trigger is the user saying "absolutely do NOT suggest X". We ask whether per
 | [RESULTS.md](RESULTS.md), section 9; [LADDER_RESULTS.md](LADDER_RESULTS.md), section 6b | Do the results hold in two new training seeds of each fine-tune? | The directions do: the persona × prohibition interaction in all 6 fine-tunes, and the ladder ranking (ρ = 0.83–0.89) in every one. The sizes don't: e.g. 22–55% for the headline share, and `hc_db` reverses outright in only 1 of 3 |
 | [LADDER_RESULTS.md](LADDER_RESULTS.md) | Does the base model's state on a "story direction" (dismissive minus helpful character, layer 36) predict how far each of 24 new prompts moves the fine-tunes? | Yes, ρ = 0.87, but not clearly better than a guess from the prompts' wording (ρ = 0.78) |
 | [LADDER_RESULTS.md](LADDER_RESULTS.md), section 6 | Why does the activation version of persona × prohibition run backwards? | A scaling effect: the direction tracks *which* character a prompt evokes, not *when* the fine-tunes act on it |
-| [WORDING_VS_INTERNALS.md](WORDING_VS_INTERNALS.md) (preregistered) | On new prompts chosen so the internal measure and the wording disagree, which one does behaviour follow? | Neither: behaviour followed the internal measure in 3 of 7 pairs. So it isn't shown to add anything beyond the wording |
+| [WORDING_VS_INTERNALS.md](WORDING_VS_INTERNALS.md) | On new prompts chosen so the internal measure and the wording disagree, which one does behaviour follow? | Neither: behaviour followed the internal measure in 3 of 7 pairs. So it isn't shown to add anything beyond the wording |
 
 The printed tables are in `results/`: `persona_flip/`, `ladder/`, `decomposition/`, `wording/` and `seeds/`.
 
@@ -140,5 +140,6 @@ persona_flip/upload_adapters.py  uploads new seeds' adapters to one Hugging Face
 persona_flip/analyze_seeds.py    published fine-tunes vs new training seeds, side by side
 persona_flip/make_figures.py     the figures in SUMMARY.md, from the tables in results/
 scripts/                         setup_gpu, get_qwen_repo, run_all, run_probe, run_samples, run_ladder, run_candidates, run_seeds
+steering/                        steering and state-copy tests of the story direction (steering/README.md)
 results/                         the printed tables from our runs
 ```
